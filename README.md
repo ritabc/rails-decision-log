@@ -44,7 +44,8 @@ rails db:migrate
   - +, -, update: decisions, circles, admins
 * 'admin':
   - + decisions
-* There won't be a way to signup, since I'll create superadmins. Superadmins can create admins, and can change them to superadmins. SA's will send email invitations to create admins
+* There won't be a way to signup, since I'll create superadmins. Superadmins can create admins, and can change them to superadmins. SA's will need to know the email of an Admin they are creating
 
 ## Stretch Goals
 * Add password length validation and corresponding error message : if the user tries to sign up with a short password, there is an appropriate error message
+## Forgot Password? feature for Admins and SA's
