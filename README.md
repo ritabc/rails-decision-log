@@ -35,5 +35,15 @@ rails db:migrate
 * To launch the server:
 ```rails server```
 
+## Authentication and Authorization.
+### User Type and User Stories
+* 'viewer' (user.type that doesn't exist - anyone can view w/o logging in) Can see:
+  - '/' : all New/Unincorporated decisions, sorted into D's with past review by date, and D's with upcoming review by dates
+  - '/archives' : all decisions, with sort and search features
+* 'super_admin':
+  - +, -, update: decisions, circles, admins
+* 'admin':
+  - + decisions
+* There won't be a way to signup, since I'll create superadmins. Superadmins can create admins, and can change them to superadmins. SA's will send email invitations to create admins
 ## Stretch Goals
 * Add password length validation and corresponding error message : if the user tries to sign up with a short password, there is an appropriate error message
