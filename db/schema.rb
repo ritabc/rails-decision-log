@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_14_203737) do
+ActiveRecord::Schema.define(version: 2018_09_14_212149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "circles", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "decisions", force: :cascade do |t|
+    t.string "name"
+    t.date "date_decided"
+    t.text "description"
+    t.date "review_by_date"
+    t.string "supp_doc_one_type"
+    t.string "supp_doc_one_link"
+    t.string "supp_doc_two_type"
+    t.string "supp_doc_two_link"
+    t.bigint "circle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_decisions_on_circle_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
