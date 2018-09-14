@@ -34,3 +34,6 @@ rails db:migrate
 ``` rails db:test:prepare```
 * To launch the server:
 ```rails server```
+
+## Stretch Goals
+* Add password length validation and corresponding error message : if the user tries to sign up with a short password, there is an appropriate error message
