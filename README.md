@@ -22,3 +22,15 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+## Setup Instructions
+* Clone the repo
+* Set up the Database
+```
+rails db:create
+rails db:migrate
+```
+* For testing environments:
+``` rails db:test:prepare```
+* To launch the server:
+```rails server```
