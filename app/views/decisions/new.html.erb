@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>Log a New Decision</h1>
+
+  <%= form_tag do %>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= label_tag(:name, "Decision Name") %>
+        <%= text_field_tag :name, "", class: 'form-control mb-2 mr-sm-2' %>
+      </div>
+
+      <div class="form-group col-md-4">
+        <%= label_tag(:circle_id, "Deciding Circle") %>
+        <%= select_tag(:circle_id, options_for_select(@circles.map {|circle| [circle.name, circle.id]}), class: "form-control mb-2 mr-sm-2") %>
+      </div>
+
+      <div class="form-group col-md-4">
+        <%= label_tag(:date_decided, "Date Decided") %>
+        <%= date_field(:decision, :date_decided, class: 'form-control mb-2 mr-sm-2') %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <%= label_tag(:description, "Decision Description") %>      <%= text_area_tag(:description, "", class: "form-control", size: "100x5") %>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= label_tag(:is_incorporated, "Is the Decision Incorporated?") %>
+          <%= radio_button_tag(:is_incorporated, "true") %>
+          <%= label_tag(:is_incorporated, "Yes", class: "form-check-label") %>
+          <%= radio_button_tag(:is_incorporated, "false") %>
+          <%= label_tag(:is_incorporated, "No", class: "form-check-label") %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= label_tag(:review_by_date, "If you answered 'No' to the previous question, please enter the date the decision should be reviewed by") %>
+          <%= date_field(:decision, :date_decided, class: 'form-control') %>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <%= submit_tag("Log Decision", class: "btn btn-primary") %>
+  <% end %>
+</div>

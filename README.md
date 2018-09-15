@@ -23,9 +23,11 @@ Things you may want to cover:
 
 * ...
 
-## Goals for This Project
+## Goals for First Draft
 * Deploy to Heroku
 * Complete Home Page
+* Integration Tests
+  - When logged out, cannot go to decisions/new page
 
 ## Setup Instructions
 * Clone the repo

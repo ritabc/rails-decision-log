@@ -1,5 +1,5 @@
 class DecisionsController < ApplicationController
-
+  before_action :authorize_admins, only: [:new]
   def unincorporated
 
   end
@@ -10,5 +10,10 @@ class DecisionsController < ApplicationController
 
   def show
     @decision = Decision.find(params[:id])
+  end
+
+  def new
+    @circles = Circle.all
+
   end
 end

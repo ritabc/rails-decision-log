@@ -19,6 +19,6 @@ describe Circle do
     test_decision1 = Decision.create(:name => "Dig a well", :description => "We decided to dig a well, and cover it with a pump house", :date_decided => Date.new(2016,5,27), :circle_id => test_circle.id)
     test_decision2 = Decision.create(:name => "Provide childcare at GC meetings", :description => "We decided to provide childcare at General Circle meetings", :date_decided => Date.new(2016,5,25), :circle_id => test_circle.id)
     test_decision3 = Decision.create(:name => "Bring priority proposal to GC", :description => "We decided to bring a proposal on priority for living at HM to the GC", :date_decided => Date.new(2016,5,26), :circle_id => test_circle.id)
-    expect(Decision.three_most_recent(test_circle)).to(eq([test_decision1, test_decision2, test_decision3])
+    expect(Decision.three_most_recent(test_circle)).to(eq([test_decision1, test_decision2, test_decision3]))
   end
 end
