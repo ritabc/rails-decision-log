@@ -7,7 +7,7 @@
       <th>Decision</th>
       <th>Deciding Circle</th>
       <th>Date Decided</th>
-      <th>Incorporated? Or Review By Date</th>
+      <th>Needs Review?</th>
       <th>Description</th>
     </tr>
   </thead>
@@ -18,9 +18,9 @@
         <td><%= decision.circle.name %></td>
         <td><%= decision.date_decided %></td>
         <% if decision.is_incorporated %>
-          <td>Yes</td>
+          <td>Incorporated</td>
         <% else %>
-          <td><%= decision.review_by_date %></td>
+          <td>On: <%= decision.review_by_date %></td>
         <% end %>
         <td><%= decision.description %></td>
       </tr>
