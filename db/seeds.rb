@@ -6,4 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-super_admins = User.create!([{email: 'ritabc@gmail.com', password: 'ecovillage123', password_confirmation: 'ecovillage123', admin_type: 'super'}])
+Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each do |seed|
+  load seed
+end

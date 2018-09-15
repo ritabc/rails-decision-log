@@ -35,6 +35,10 @@ rails db:migrate
 * To launch the server:
 ```rails server```
 
+* To create a super_admin login, add a db/seeds directory, and a admins.rb file within there, and add this code to that file:
+```super_admins = User.create!([{email: 'your_email', password: 'a_password', password_confirmation: 'a_password', admin_type: 'super'}])```
+Then run ```rails db:reset``` or ```rails db:seed```
+
 ## Authentication and Authorization.
 ### User Type and User Stories
 * 'viewer' (user.type that doesn't exist - anyone can view w/o logging in) Can see:
