@@ -1,4 +1,5 @@
 class DecisionsController < ApplicationController
+  before_action :authorize, only: [:new]
   before_action :authorize_admins, only: [:new]
   def unincorporated
 
