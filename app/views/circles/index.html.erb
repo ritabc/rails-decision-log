@@ -1,0 +1,13 @@
+<h1>Decisions By Circle</h1>
+
+<% @circles.each do |circle| %>
+  <h2><%= circle.name %></h2>
+  <p><%= circle.description %></p>
+  <% if !Decision.three_most_recent.empty? %>
+    <p>There are not yet decisions for this circle.</p>
+  <% else %>
+    <% Decision.three_most_recent.each do |decision| %>
+      <p><%= link_to "#{decision.name}", decision_path(decision.id) %></p>
+    <% end %>
+  <% end %>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_15_003524) do
+ActiveRecord::Schema.define(version: 2018_09_15_053314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2018_09_15_003524) do
     t.bigint "circle_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_incorporated"
     t.index ["circle_id"], name: "index_decisions_on_circle_id"
   end
 

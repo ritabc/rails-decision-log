@@ -4,10 +4,10 @@ Rails.application.routes.draw do
 
   resources :circles , :only => :index
 
-  resources :decisions, :only => :index
+  resources :decisions, :only => [:index, :show]
 
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
   get '/signout' => 'sessions#destroy'
-  
+
 end
