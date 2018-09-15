@@ -1,13 +1,15 @@
-<h1>Decisions By Circle</h1>
+<h1>Recent Decisions By Circle</h1>
 
 <% @circles.each do |circle| %>
   <h2><%= circle.name %></h2>
   <p><%= circle.description %></p>
-  <% if !Decision.three_most_recent(circle).empty? %>
+  <% if Decision.three_most_recent(circle).empty? %>
     <p>There are not yet decisions for this circle.</p>
   <% else %>
-    <% Decision.three_most_recent(circle).each do |decision| %>
-      <p><%= link_to "#{decision.name}", decision_path(decision.id) %></p>
-    <% end %>
+    <ul>
+      <% Decision.three_most_recent(circle).each do |decision| %>
+        <li><%= link_to "#{decision.name}", decision_path(decision.id) %></li>
+      <% end %>
+    </ul>
   <% end %>
 <% end %>
