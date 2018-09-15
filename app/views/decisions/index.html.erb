@@ -1,0 +1,29 @@
+<h1>All Decisions</h1>
+<!-- All Decision details, options to sort by Recent, by circle, -->
+
+<table>
+  <thead>
+    <tr>
+      <th>Decision</th>
+      <th>Deciding Circle</th>
+      <th>Date Decided</th>
+      <th>Incorporated? Or Review By Date</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @decisions.each do |decision| %>
+      <tr>
+        <td><%= link_to "#{decision.name}", decision_path(decision.id)%></td>
+        <td><%= decision.circle.name %></td>
+        <td><%= decision.date_decided %></td>
+        <% if decision.is_incorporated %>
+          <td>Yes</td>
+        <% else %>
+          <td><%= decision.review_by_date %></td>
+        <% end %>
+        <td><%= decision.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
