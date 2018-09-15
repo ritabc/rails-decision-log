@@ -49,3 +49,4 @@ rails db:migrate
 ## Stretch Goals
 * Add password length validation and corresponding error message : if the user tries to sign up with a short password, there is an appropriate error message
 ## Forgot Password? feature for Admins and SA's
+## Search Feature (words in decision)
