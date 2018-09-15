@@ -23,6 +23,10 @@ Things you may want to cover:
 
 * ...
 
+## Goals for This Project
+* Deploy to Heroku
+* Complete Home Page
+
 ## Setup Instructions
 * Clone the repo
 * Set up the Database
