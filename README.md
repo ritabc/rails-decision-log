@@ -42,7 +42,8 @@ rails db:migrate
 ```rails server```
 
 * To create a super_admin login, add a db/seeds directory, and a admins.rb file within there, and add this code to that file:
-```super_admins = User.create!([{email: 'your_email', password: 'a_password', password_confirmation: 'a_password', admin_type: 'super'}])```
+```admins = User.create!([{email: 'your_email', password: 'a_password', password_confirmation: 'a_password', admin_type: 'super'}])```
+Optionally add another with a regular admin_type: 'admin'
 Then run ```rails db:reset``` or ```rails db:seed```
 
 ## Authentication and Authorization.
