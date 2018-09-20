@@ -6,7 +6,7 @@ class DecisionsController < ApplicationController
   end
 
   def index
-    @decisions = Decision.all
+    @decisions = Decision.order(params[:sort])
   end
 
   def show

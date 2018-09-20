@@ -4,9 +4,9 @@
 <table>
   <thead>
     <tr>
-      <th>Decision</th>
-      <th>Deciding Circle</th>
-      <th>Date Decided</th>
+      <th><%= link_to "Decision", :sort => :name %></th>
+      <th><%= link_to "Deciding Circle", :sort => "circle_id" %></th>
+      <th><%= link_to "Date Decided", :sort => "date_decided" %></th>
       <th>Needs Review?</th>
       <th>Description</th>
     </tr>

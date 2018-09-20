@@ -56,8 +56,10 @@ Then run ```rails db:reset``` or ```rails db:seed```
 * 'admin':
   - + decisions
 * There won't be a way to signup, since I'll create superadmins. Superadmins can create admins, and can change them to superadmins. SA's will need to know the email of an Admin they are creating
+* Sortable columns on All Decisions page:
+ - Decision name, Deciding Circle, Date Decided
 
 ## Stretch Goals
 * Add password length validation and corresponding error message : if the user tries to sign up with a short password, there is an appropriate error message
-## Forgot Password? feature for Admins and SA's
-## Search Feature (words in decision)
+* Forgot Password? feature for Admins and SA's
+* Search Feature (words in decision)
