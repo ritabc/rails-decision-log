@@ -23,6 +23,17 @@ Things you may want to cover:
 
 * ...
 
+## Completed Features
+* View list of all decisions
+* View list of decisions by circle
+* View individual decisions
+* Login / Logout functionality for Admins
+* Can only view add decision page if admin
+* Sortable columns on All Decisions page (with help from Ryan Bates' RailsCast #288)
+  - Decision name
+  - Deciding Circle
+  - Date Decided
+
 ## Goals for First Draft
 * Deploy to Heroku
 * Complete Home Page
@@ -56,8 +67,7 @@ Then run ```rails db:reset``` or ```rails db:seed```
 * 'admin':
   - + decisions
 * There won't be a way to signup, since I'll create superadmins. Superadmins can create admins, and can change them to superadmins. SA's will need to know the email of an Admin they are creating
-* Sortable columns on All Decisions page:
- - Decision name, Deciding Circle, Date Decided
+
 
 ## Stretch Goals
 * Add password length validation and corresponding error message : if the user tries to sign up with a short password, there is an appropriate error message
