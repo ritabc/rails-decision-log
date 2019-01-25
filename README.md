@@ -1,75 +1,67 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Decision Log in Rails
+#### Created by Rita Bennett-Chew, for Hart's Mill Eco-Village
+#### https://hmev-decision-log.herokuapp.com/
 
 ## Completed Features
-* View list of all decisions
-* View list of decisions by circle
-* View individual decisions
-* Login / Logout functionality for Admins
-* Can only view add decision page if admin
+* Home page of Unincorporated Decisions (usually newer ones that are still pending review)
+* A list of all decisions
+* Decisions conducted by each circle
+* Individual decisions page, including in some cases external links to Supporting Documents (Proposals for Change or Meeting Minutes)
+* Login / Logout functionality for Admins and Supers
+* Can only Add a Decision or view the New Decision Form if logged in as an admin or super
 * Sortable columns on All Decisions page (with help from Ryan Bates' RailsCast #288)
   - Decision name
   - Deciding Circle
   - Date Decided
+* Use of BCrypt gem for Authentication
 
-## Goals for First Draft
-* Deploy to Heroku
-* Complete Home Page
-* Integration Tests
-  - When logged out, cannot go to decisions/new page
+## Screenshot of New Decision Page
+#### As viewable by Admin and Super Users
+![image](https://user-images.githubusercontent.com/11031915/51766169-ec718280-20a7-11e9-924b-96d1f8230961.png)
 
-## Setup Instructions
-* Clone the repo
-* Set up the Database
-```
-rails db:create
-rails db:migrate
-```
-* For testing environments:
-``` rails db:test:prepare```
-* To launch the server:
-```rails server```
+## User Type, User Stories
+#### (Some of this functionality is still in-progress)
+* Public 'viewer.' Anyone, without logging in, can see:
+  - Home page with Unincorporated Decisions (usually newer ones)
+  - all decisions; individually or sorted by name, circle, or ate decided.
+* Login required for 'admin.' Above, plus can:
+  - Can add new decisions
+* Login required for 'super.' Above, plus can:
+  - Delete decisions
+  - Create, Edit, and Delete Circles
+  - Create, Edit, and Delete Admins
 
-* To create a super_admin login, add a db/seeds directory, and a admins.rb file within there, and add this code to that file:
-```admins = User.create!([{email: 'your_email', password: 'a_password', password_confirmation: 'a_password', admin_type: 'super'}])```
-Optionally add another with a regular admin_type: 'admin'
-Then run ```rails db:reset``` or ```rails db:seed```
-
-## Authentication and Authorization.
-### User Type and User Stories
-* 'viewer' (user.type that doesn't exist - anyone can view w/o logging in) Can see:
-  - '/' : all New/Unincorporated decisions, sorted into D's with past review by date, and D's with upcoming review by dates
-  - '/archives' : all decisions, with sort and search features
-* 'super_admin':
-  - +, -, update: decisions, circles, admins
-* 'admin':
-  - + decisions
-* There won't be a way to signup, since I'll create superadmins. Superadmins can create admins, and can change them to superadmins. SA's will need to know the email of an Admin they are creating
-
-
-## Stretch Goals
+## Goals for the Application
+* Continue to work with Hart's Mill Eco-Village to design this product with their needs in mind
+* Beautify and advance the site's style
+* 'Forgot Password' feature for Admins and Supers
 * Add password length validation and corresponding error message : if the user tries to sign up with a short password, there is an appropriate error message
-* Forgot Password? feature for Admins and SA's
 * Search Feature (words in decision)
+* Use the Devise gem for Authorization
+* Add integration tests
+* Have HM be a group - other organizations could use this tool as well
+* 'Request Invite' feature: Since edits to these decisions are done by Hart's Mill Members only, a form where a viewer can request to be added as an admin should be available. This would send an email the supers
+
+## For contributions or to serve locally
+1. Fork and clone the [repo](https://github.com/ritabc/rails-decision-log)
+1. Run `bundle install` to install necessary
+1. Create the database using `rails db:create`
+1. Run migrations and prepare test database using `rails db:migrate` and `rails db:test:prepare`
+1. Seed the database with `rails db:seed`
+1. Launch server using `rails s`
+1. To test, run `rspec`
+1. Make changes and submit a PR
+1. To create admins using the Rails Console:
+  * Run `rails c`
+  * Use this template for creating admins: ```admins = User.create!([{email: 'your_email', password: 'a_password', password_confirmation: 'a_password', admin_type: 'super'}])```
+  * Run `rails db:test:prepare`
+
+## Notes about the application
+* Ruby v. 2.5.3
+* Rails v. 5.2.1
+* Uses PostgreSQL as the Active Record Database
+* Deployed using Heroku
+* Lightly styled with Bootstrap 4.0.0
+* This application is licensed under the MIT license.
+
+If you'd like to learn about the Hart's Mill Eco-Village community/project, see the [website](http://www.hartsmill.org/) for more details.
