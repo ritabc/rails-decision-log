@@ -3,51 +3,66 @@
 
   <%= form_for @decision do %>
 
+    <h2>Decision Details</h2>
+
     <div class="form-row">
-      <div class="form-group col-md-4">
-        <%= label_tag('decision[name]', "Decision Name") %>
+      <div class="form-group col-md-5">
+        <%= label_tag('decision[name]', "Name") %>
         <%= text_field_tag 'decision[name]', "", class: 'form-control mb-2 mr-sm-2' %>
       </div>
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-5">
         <%= label_tag('decision[circle_id]', "Deciding Circle") %>
         <%= select_tag('decision[circle_id]', options_for_select(@circles.map {|circle| [circle.name, circle.id]}), class: "form-control mb-2 mr-sm-2") %>
       </div>
 
-      <div class="col-md-4">
-        <div class="form-group">
-          <%= label_tag('decision[date_decided]', "Date Decided") %>
-          <%= date_field_tag('decision[date_decided]', class: 'form-control mb-2 mr-sm-2') %>
-        </div>
+      <div class="form-group col-md-2">
+        <%= label_tag('decision[date_decided]', "Date Decided") %>
+        <br>
+        <%= date_field_tag('decision[date_decided]', class: 'form-control mb-2 mr-sm-2') %>
       </div>
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-12">
-        <%= label_tag('decision[description]', "Decision Description") %>
+
+      <div class="form-group col-md-10">
+        <%= label_tag('decision[description]', "Description") %>
+        <br>
+        <%= label_tag('decision[description]', "This will be publicly viewable by any visitor to this decision log") %>
         <%= text_area_tag('decision[description]', "", class: "form-control", size: "100x5") %>
       </div>
+
+      <div class="form-group col-md-2 top-bottom-pad">
+        <%= label_tag('decision[review_by_date]', "Review On (Optional)") %>
+        <br>
+        <%= date_field_tag('decision[review_by_date]', class: 'form-control') %>
+      </div>
+
     </div>
+
+    <h2>Supporting Documents</h2>
 
     <div class="form-row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= label_tag('decision[is_incorporated]', "Is the Decision Incorporated?") %>
-          <%= radio_button_tag('decision[is_incorporated]', "true") %>
-          <%= label_tag('decision[is_incorporated]', "Yes", class: "form-check-label") %>
-          <%= radio_button_tag('decision[is_incorporated]', "false") %>
-          <%= label_tag('decision[is_incorporated]', "No", class: "form-check-label") %>
-        </div>
+      <div class="form-group col-md-4">
+        <%= label_tag('decision[supp_doc_one_type]', "Document 1 Type") %>
+        <%= text_field_tag('decision[supp_doc_one_type]', "", class: 'form-control mb-2 mr-sm-2') %>
       </div>
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= label_tag('decision[review_by_date]', "If you answered 'No' to the previous question, please enter the date the decision should be reviewed by") %>
-          <%= date_field_tag('decision[review_by_date]', class: 'form-control') %>
-        </div>
+      <div class="form-group col-md-8">
+        <%= label_tag('decision[supp_doc_one_link]', "Link") %>
+        <%= text_field_tag('decision[supp_doc_one_link]', "", class: 'form-control mb-2 mr-sm-2') %>
       </div>
     </div>
-    
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= label_tag('decision[supp_doc_two_type]', "Document 2 Type") %>
+        <%= text_field_tag('decision[supp_doc_two_type]', "", class: 'form-control mb-2 mr-sm-2') %>
+      </div>
+      <div class="form-group col-md-8">
+        <%= label_tag('decision[supp_doc_two_link]', "Link") %>
+        <%= text_field_tag('decision[supp_doc_two_link]', "", class: 'form-control mb-2 mr-sm-2') %>
+      </div>
+    </div>
+
     <%= submit_tag("Log Decision", class: "btn btn-primary") %>
   <% end %>
 </div>

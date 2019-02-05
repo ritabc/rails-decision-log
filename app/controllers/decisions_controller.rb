@@ -3,10 +3,6 @@ class DecisionsController < ApplicationController
   before_action :authorize_admins, only: [:new]
   helper_method :sort_column, :sort_direction
 
-  def unincorporated
-
-  end
-
   def index
     @decisions = Decision.order(sort_column + " " + sort_direction)
   end
@@ -35,7 +31,7 @@ class DecisionsController < ApplicationController
 private
 
   def decision_params
-    params.require(:decision).permit(:name, :date_decided, :is_incorporated, :circle_id, :description, :review_by_date, :supp_doc_one_link, :supp_doc_one_type, :supp_doc_two_link, :supp_doc_two_type)
+    params.require(:decision).permit(:name, :date_decided, :circle_id, :description, :review_by_date, :supp_doc_one_link, :supp_doc_one_type, :supp_doc_two_link, :supp_doc_two_type)
   end
 
   def sort_column
