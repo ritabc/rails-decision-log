@@ -31,6 +31,9 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 gem 'bootstrap-datepicker-rails'
+gem 'bootstrap4-datetime-picker-rails'
+gem 'momentjs-rails', '~> 2.9'
+gem 'moment_timezone-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
