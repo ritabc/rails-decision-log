@@ -38,7 +38,6 @@ class DecisionsController < ApplicationController
 private
 
   def decision_params
-    binding.pry
     params.require(:decision).permit(:name, :date_decided, :circle_id, :description, :review_by_date, :supp_doc_one_link, :supp_doc_one_type, :supp_doc_two_link, :supp_doc_two_type)
   end
 

@@ -17,7 +17,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//= require bootstrap-datepicker
 //= require moment
 //= require moment-timezone
 //= require tempusdominus-bootstrap-4
