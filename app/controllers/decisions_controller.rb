@@ -17,13 +17,18 @@ class DecisionsController < ApplicationController
 
   def create
     @decision = Decision.new(decision_params)
-    @decision.date_decided = Date.parse(decision_params["date_decided"])
-    @decision.review_by_date = Date.parse(decision_params["review_by_date"])
+    # TODO: Remove following lines from controller
+    @decision.date_decided = Date.strptime(decision_params["date_decided"], '%m/%d/%Y')
+    # TODO: Make following conditional ternary
+    if @decision.review_by_date
+      @decision.review_by_date = Date.strptime(decision_params["review_by_date"], '%m/%d/%Y')
+    else
+      @decision.review_by_date = nil
+    end
     if @decision.save
       flash[:notice] = "Decision successfully added!"
       redirect_to decisions_path # TODO: Should probably direct to that added decision OR the new_decision_path so user can add another (if go this route, make flash more noticeable)
     else
-      binding.pry
       flash[:alert] = "Please try again - no decision was added"
       redirect_to new_decision_path
     end

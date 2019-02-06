@@ -17,10 +17,11 @@
       </div>
 
       <div class="form-group col-md-3">
-        <label for="decision[date_decided]">Date Decided</label>
-        <div class="input-group date" data-provide="datepicker" data-date-todayHighlight="true">
-          <input type="text" name="decision[date_decided]" class="form-control mb-2 mr-sm-2">
-          <div class="input-group-addon">
+        <label for="decision[date_decided]">Date Decided (Required)</label>
+        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+          <input type="text" name="decision[date_decided]" class="form-control datetimepicker-input mb-2 mr-sm-2" data-target="#datetimepicker1">
+          <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+            <div class="input-group-text"><span class="fas fa-calendar"></span></div>
           </div>
         </div>
       </div>
@@ -36,9 +37,10 @@
 
       <div class="form-group col-md-3">
         <label for="decision[review_by_date]">Review On (Optional)</label>
-        <div class="input-group date" data-provide="datepicker">
-          <input type="text" name="decision[review_by_date]" class="form-control mb-2 mr-sm-2">
-          <div class="input-group-addon">
+        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+          <input type="text" name="decision[review_by_date]" class="form-control datetimepicker-input mb-2 mr-sm-2" data-target="#datetimepicker2">
+          <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+            <div class="input-group-text"><span class="fas fa-calendar"></span></div>
           </div>
         </div>
       </div>
