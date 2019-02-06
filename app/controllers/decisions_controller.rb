@@ -1,6 +1,5 @@
 class DecisionsController < ApplicationController
-  before_action :authorize, only: [:new]
-  before_action :authorize_admins, only: [:new]
+  before_action :block_public_viewer, only: [:new]
   helper_method :sort_column, :sort_direction
 
   def index
@@ -20,7 +19,7 @@ class DecisionsController < ApplicationController
     @decision = Decision.new(decision_params)
     if @decision.save
       flash[:notice] = "Decision successfully added!"
-      redirect_to decisions_path
+      redirect_to decisions_path # TODO: Should probably direct to that added decision OR the new_decision_path so user can add another (if go this route, make flash more noticeable)
     else
       flash[:alert] = "Please try again - no decision was added"
       redirect_to new_decision_path

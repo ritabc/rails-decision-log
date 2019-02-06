@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :user do
-    email("test@rita.com")
+    email("rita@test.com")
     password("password")
-    password_confirmation "password"
-  end
+    password_confirmation("password")
+    admin_type("admin")
 
   # factory :circle do
   #   name("Land Stewardship")
@@ -14,5 +14,5 @@ FactoryBot.define do
   #     description("We decided to dig a well, and cover it with a pump house")
   #     date_decided(Date.new(2016,5,27))
   #   end
-  # end
+  end
 end

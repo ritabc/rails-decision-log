@@ -11,9 +11,7 @@
 
   <body>
     <nav class="navbar">
-      <!-- links to '/', Decisions By Circle, All Decisions, Admin Log In -->
       <p><%= link_to "Home", root_path %> </p>
-      <p><%= link_to "Decisions By Circle", circles_path %></p>
       <p><%= link_to "All Decisions", decisions_path %></p>
       <% if current_user && currently_super_admin? %>
         <p><%= link_to "All Users", users_path %></p>
