@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id="new-decision">
   <h1>Log a New Decision</h1>
 
   <%= form_for @decision do %>
@@ -11,37 +11,41 @@
         <%= text_field_tag 'decision[name]', "", class: 'form-control mb-2 mr-sm-2' %>
       </div>
 
-      <div class="form-group col-md-5">
+      <div class="form-group col-md-4">
         <%= label_tag('decision[circle_id]', "Deciding Circle") %>
         <%= select_tag('decision[circle_id]', options_for_select(@circles.map {|circle| [circle.name, circle.id]}), class: "form-control mb-2 mr-sm-2") %>
       </div>
 
-      <div class="form-group col-md-2">
-        <%= label_tag('decision[date_decided]', "Date Decided") %>
-        <br>
-        <%= date_field_tag('decision[date_decided]', class: 'form-control mb-2 mr-sm-2') %>
+      <div class="form-group col-md-3">
+        <label for="decision[date_decided]">Date Decided</label>
+        <div class="input-group date" data-provide="datepicker" data-date-todayHighlight="true">
+          <input type="text" name="decision[date_decided]" class="form-control mb-2 mr-sm-2">
+          <div class="input-group-addon">
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="form-row">
 
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-9">
         <%= label_tag('decision[description]', "Description") %>
-        <br>
-        <%= label_tag('decision[description]', "This will be publicly viewable by any visitor to this decision log") %>
+        <span><em>(Viewable by all visitors to this site)</em></span>
         <%= text_area_tag('decision[description]', "", class: "form-control", size: "100x5") %>
       </div>
 
-      <div class="form-group col-md-2 top-bottom-pad">
-        <%= label_tag('decision[review_by_date]', "Review On (Optional)") %>
-        <br>
-        <%= date_field_tag('decision[review_by_date]', class: 'form-control') %>
+      <div class="form-group col-md-3">
+        <label for="decision[review_by_date]">Review On (Optional)</label>
+        <div class="input-group date" data-provide="datepicker">
+          <input type="text" name="decision[review_by_date]" class="form-control mb-2 mr-sm-2">
+          <div class="input-group-addon">
+          </div>
+        </div>
       </div>
-
     </div>
 
     <h2>Supporting Documents</h2>
-
+    <p><em>(Eg: Minutes, Rejected Proposal, or Accepted Proposal from OnlyOffice. Note: these will be viewable only by those able to log in to OnlyOffice)</em></p>
     <div class="form-row">
       <div class="form-group col-md-4">
         <%= label_tag('decision[supp_doc_one_type]', "Document 1 Type") %>
