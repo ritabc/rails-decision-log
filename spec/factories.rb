@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :user do
     email("rita@test.com")
-    password("password")
-    password_confirmation("password")
+    password("Pa$$word123")
+    password_confirmation("Pa$$word123")
     admin_type("admin")
 
   # factory :circle do
