@@ -10,9 +10,9 @@ class Decision < ApplicationRecord
     .limit(3)
   })
 
-  def self.search(search)
+  def self.name_description_search(search)
     if search
-      decisions = Decision.where("lower(name) LIKE ?", "%#{search.downcase}%")
+      decisions = Decision.where("name ILIKE :q or description ILIKE :q", q: "%#{search}%")
     else
       decisions = Decision.all
     end

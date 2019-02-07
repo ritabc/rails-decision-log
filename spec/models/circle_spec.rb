@@ -6,7 +6,6 @@ describe Circle do
   it { should validate_presence_of :description }
 
   # it 'will test the three_most_recent scope using FactoryBot' do
-  #   binding.pry
   #   test_circle = FactoryBot.create(:circle)
   #   test_decision1 = FactoryBot.create(:decision)
   #   test_decision2 = FactoryBot.create(:decision)

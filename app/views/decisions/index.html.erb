@@ -1,5 +1,9 @@
 <div class="title-search">
-  <h1>All Decisions</h1>
+  <% if params[:search] && !params[:search].empty? %>
+    <h1>Results for: "<%= params[:search] %>"</h1>
+  <% else  %>
+    <h1>All Decisions</h1>
+  <% end %>
   <span class="search">
     <%= render "/layouts/search" %>
   </span>
