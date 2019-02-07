@@ -1,5 +1,9 @@
-<h1>Recent Decisions By Circle</h1>
-
+<div class="title-search">
+  <h1>Recent Decisions By Circle</h1>
+  <span class="search">
+    <%= render "/layouts/search" %>
+  </span>
+</div>
 <% @circles.each do |circle| %>
   <h2><%= circle.name %></h2>
   <p><%= circle.description %></p>

@@ -3,7 +3,7 @@ class DecisionsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @decisions = Decision.order(sort_column + " " + sort_direction)
+    @decisions = Decision.search(params[:search]).order(sort_column + " " + sort_direction)
   end
 
   def show

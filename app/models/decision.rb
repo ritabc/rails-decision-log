@@ -9,4 +9,12 @@ class Decision < ApplicationRecord
     .order(date_decided: :desc)
     .limit(3)
   })
+
+  def self.search(search)
+    if search
+      decisions = Decision.where("lower(name) LIKE ?", "%#{search.downcase}%")
+    else
+      decisions = Decision.all
+    end
+  end
 end

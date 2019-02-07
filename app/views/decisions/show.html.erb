@@ -1,4 +1,10 @@
-<h1><%= @decision.name %></h1>
+<div class="title-search">
+  <h1><%= @decision.name %></h1>
+  <span class="search">
+    <%= render "/layouts/search" %>
+  </span>
+</div>
+
 <h5>
   <b>Circle: </b><span><%= @decision.circle.name %></span>
 </h5>
@@ -23,4 +29,4 @@
       <%= link_to "#{@decision.supp_doc_two_type}", @decision.supp_doc_two_link, target: :_blank %>
     </span>
   <% end %>
-  </h5>
+</h5>

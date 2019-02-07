@@ -8,3 +8,41 @@
 #new-decision {
   margin-bottom: 30px;
 }
+
+// Style Search Bar
+.title-search {
+  overflow: hidden;
+}
+
+// Style elements inside .title-search
+.title-search * {
+  float: left;
+  display: block;
+  // padding
+  // text-decoration:
+}
+
+.title-search h1 {
+  text-align: center;
+}
+
+// Style the search box
+.title-search span.search {
+  float: right;
+  padding: 15.662px 2px 15.662px 0; 
+  }
+.title-search input[type=text] {
+  font-size: 17px;
+  border: solid 1px #A6ACB1;
+}
+
+.title-search input[type=submit] {
+  font-size: 17px;
+  border: solid 1px #A6ACB1;
+}
+
+
+// .search {
+//   display: inline;
+//   float: right;
+// }
