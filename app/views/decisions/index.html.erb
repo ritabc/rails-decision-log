@@ -17,10 +17,10 @@
         <td><%= link_to "#{decision.name}", decision_path(decision.id)%></td>
         <td><%= decision.circle.name %></td>
         <td><%= decision.date_decided %></td>
-        <% if decision.is_incorporated %>
-          <td>Incorporated</td>
-        <% else %>
+        <% if decision.review_by_date %>
           <td>On: <%= decision.review_by_date %></td>
+        <% else %>
+          <td></td>
         <% end %>
         <td><%= decision.description %></td>
       </tr>

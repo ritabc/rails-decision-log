@@ -6,13 +6,9 @@
 <h5>
   <b>Decided: </b><span><%= @decision.date_decided %></span>
 </h5>
-<% if @decision.is_incorporated %>
+<% if @decision.review_by_date %>
   <h5>
-    <b>Needs Review? </b><span>Already Incorporated</span>
-  </h5>
-<% else %>
-  <h5>
-    <b>Review By Date: </b><span><%= @decision.review_by_date %> </span>
+    <b>Review By Date: </b><span><%= @decision.review_by_date %></span>
   </h5>
 <% end %>
 <h5><b>Supporting Documents </b><span>(May require an OnlyOffice login)</span></h5>

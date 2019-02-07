@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root :to => 'decisions#unincorporated'
+  root :to => 'circles#index'
 
   resources :circles , :only => :index
 
