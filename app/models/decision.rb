@@ -4,6 +4,10 @@ class Decision < ApplicationRecord
   validates_presence_of :description
   validates_presence_of :date_decided
 
+  include PgSearch
+  pg_search_scope :custom_search, against: [:name, :description],
+      using: {tsearch: {dictionary: "english"}}
+
   scope(:three_most_recent, -> (circle) {
     where("circle_id = ?", circle.id)
     .order(date_decided: :desc)
@@ -11,10 +15,10 @@ class Decision < ApplicationRecord
   })
 
   def self.name_description_search(search)
-    if search
-      decisions = Decision.where("name ILIKE :q or description ILIKE :q", q: "%#{search}%")
+    if search.present?
+      custom_search(search)
     else
-      decisions = Decision.all
+      Decision.all
     end
   end
 end
