@@ -15,8 +15,8 @@
     <tr>
       <th><%= sortable "name", "Decision" %></th>
       <th><%= sortable "circle_id", "Circle" %></th>
-      <th><%= sortable "date_decided", "Date Decided" %></th>
-      <th>Needs Review?</th>
+      <th><%= sortable "date_decided", "Decided On" %></th>
+      <th>Review On</th>
       <th>Description</th>
     </tr>
   </thead>
@@ -27,7 +27,7 @@
         <td><%= decision.circle.name %></td>
         <td><%= decision.date_decided %></td>
         <% if decision.review_by_date %>
-          <td>On: <%= decision.review_by_date %></td>
+          <td><%= decision.review_by_date %></td>
         <% else %>
           <td></td>
         <% end %>
