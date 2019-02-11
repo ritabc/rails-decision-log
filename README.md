@@ -17,7 +17,7 @@
 
 ## Screenshot of New Decision Page
 #### As viewable by Admin and Super Users
-![image](https://user-images.githubusercontent.com/11031915/51766169-ec718280-20a7-11e9-924b-96d1f8230961.png)
+![image](https://user-images.githubusercontent.com/11031915/52574218-d1ae4600-2de9-11e9-8b33-c088935a7330.png)
 
 ## User Type, User Stories
 #### (Some of this functionality is still in-progress)
