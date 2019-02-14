@@ -1,4 +1,4 @@
-<%= form_tag decisions_path, :method => 'get' do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Decisions" %>
-  <%= submit_tag "Search", :name => nil %>
+<%= form_tag decisions_path, :method => 'get', class: "form-inline my-2 my-lg-0" do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Decisions", class: "form-control mr-sm-2", 'aria-label': "Search" %>
+  <%= submit_tag "Search", :name => nil, class: "btn btn-outline-primary my-2 my-sm-0" %>
 <% end %>
