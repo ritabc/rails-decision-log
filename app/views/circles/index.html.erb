@@ -1,10 +1,10 @@
-<div class="title-search">
+<!-- <div class="title-search">
   <h1>Recent Decisions By Circle</h1>
   <span class="search">
-    <%= render "/layouts/search" %>
+    <%#= render "/layouts/search" %>
   </span>
-</div>
-<%= render "/layouts/sort_search_nav", title: "Recent Decisions By Circle" %>
+</div> -->
+<%= render "/layouts/sort_search_nav", locals: {title: "Recent Decisions By Circle", sort_available?: false} %>
 
 <% @circles.each do |circle| %>
   <h2><%= circle.name %></h2>

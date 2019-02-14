@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
   helper_method :currently_super_admin?
+  helper_method :searching?
 
   def current_user
     if session[:user_id]
@@ -24,6 +25,11 @@ class ApplicationController < ActionController::Base
       flash[:alert] = "You aren't authorized to visit that page"
       redirect_to signin_path
     end
+  end
+
+  # Helper method for sort/search toggle. To be used in both views AND controllers
+  def searching?
+    params[:search] && !params[:search].empty?
   end
 
   # def authorize_super
