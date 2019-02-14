@@ -1,31 +1,4 @@
-<nav class="navbar navbar-light navbar-expand-md">
-  <span class="navbar-brand">
-    <% if params[:search] && !params[:search].empty? %>
-      <h1>Results for: '<%= params[:search] %>'</h1>
-    <% else  %>
-      <h1>All Decisions</h1>
-    <% end %>
-  </span>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <% if !(params[:search] && !params[:search].empty?) %>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item sortable">
-          <%= sortable "name", "Name" %>
-        </li>
-        <li class="nav-item sortable"><%= sortable "circle_id", "Circle" %></li>
-        <li class="nav-item sortable"><%= sortable "date_decided", "Date Decided" %></li>
-      </ul>
-    <% end %>
-    <%= render "/layouts/search" %>
-  </div>
-</nav>
-
-
-
+<%= render "/layouts/sort_search_nav", title: "All Decisions" %>
 
 <!-- All Decision details, options above to sort by Recent, by circle, -->
 

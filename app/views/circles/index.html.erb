@@ -4,6 +4,8 @@
     <%= render "/layouts/search" %>
   </span>
 </div>
+<%= render "/layouts/sort_search_nav", title: "Recent Decisions By Circle" %>
+
 <% @circles.each do |circle| %>
   <h2><%= circle.name %></h2>
   <p><%= circle.description %></p>
