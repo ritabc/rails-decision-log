@@ -1,8 +1,7 @@
 <%= render "/layouts/sort_search_nav", locals: {title: "All Decisions", sort_available?: true} %>
 
-<!-- All Decision details, options above to sort by Recent, by circle, -->
-
-<div class="decsiions">
+<!-- All Decisions and their details, options above to sort -->
+<div class="container">
   <% @decisions.each do |decision| %>
     <span><strong><%= decision.name %></strong></span>
     <br>
