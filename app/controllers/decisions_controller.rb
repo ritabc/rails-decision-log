@@ -6,7 +6,8 @@ class DecisionsController < ApplicationController
     if searching?
       @decisions = Decision.name_description_search(params[:search])
     else
-      @decisions = Decision.order(sort_column + " " + sort_direction)
+      # Sort by lowercase name or regular date/circle
+      @decisions = sorting_by_name? ? Decision.order("lower(name) #{sort_direction}") : Decision.order(sort_column + " " + sort_direction)
     end
   end
 
@@ -51,5 +52,9 @@ private
 
   def sort_direction
     ["asc", "desc"].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def sorting_by_name?
+    sort_column == "name"
   end
 end
