@@ -3,13 +3,31 @@
 <!-- All Decisions and their details, options above to sort -->
 <div class="container">
   <% @decisions.each do |decision| %>
-    <span><strong><%= decision.name %></strong></span>
-    <br>
-    <span>Decided: <i><%= decision.date_decided %></i>, <%= decision.circle.name %></span>
-    <p><%= decision.description %></p>
-    <% if decision.review_by_date %>
-      <p>This decision should be reviewed on: <%= decision.review_by_date %></p>
-    <% end %>
-    <p>~~~~~~</p>
+    <div class="each-decision">
+      <h5><strong><%= decision.name %></strong></h5>
+      <span>Decided: <i><%= decision.date_decided %></i>, <%= decision.circle.name %></span>
+      <br>
+      <% if decision.review_by_date %>
+        <span>Review on: <%= decision.review_by_date %></span>
+      <% end %>
+      <p><%= decision.description %></p>
+      <% if decision.has_doc?('one') || decision.has_doc?('two') %>
+        <strong>Supporting Documents:</strong>
+        <% if decision.has_doc?('one') %>
+          <span>
+            <%= link_to "#{decision.supp_doc_one_type}", decision.supp_doc_one_link, target: :_blank %>
+          </span>
+        <% end %>
+        <% if decision.has_doc?('two') %>
+          | <span>
+            <%= link_to "#{decision.supp_doc_two_type}", decision.supp_doc_two_link, target: :_blank %>
+          </span>
+        <% end %>
+        <i>(Note: These may require OnlyOffice login)</i>
+      <% end %>
+      <p class="custom-hr">
+        ~~~~~~~~~~~~~~~
+      </p>
+    </div>
   <% end %>
 </div>

@@ -21,4 +21,12 @@ class Decision < ApplicationRecord
       Decision.all
     end
   end
+
+  def has_doc?(doc_number)
+    if doc_number == 'one'
+      !(supp_doc_one_type.nil? || supp_doc_one_type.empty?)
+    elsif doc_number == 'two'
+      !(supp_doc_two_type.nil? || supp_doc_two_type.empty?)
+    end
+  end
 end
