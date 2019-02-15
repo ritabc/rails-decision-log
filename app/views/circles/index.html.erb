@@ -8,7 +8,7 @@
     <% else %>
       <ul>
         <% Decision.three_most_recent(circle).each do |decision| %>
-          <li><%= link_to "#{decision.name}", decision_path(decision.id) %></li>
+          <li><%= decision.name %></li>
         <% end %>
       </ul>
     <% end %>

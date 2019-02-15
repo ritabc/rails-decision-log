@@ -11,10 +11,6 @@ class DecisionsController < ApplicationController
     end
   end
 
-  def show
-    @decision = Decision.find(params[:id])
-  end
-
   def new
     @circles = Circle.all
     @decision = Decision.new

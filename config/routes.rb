@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :circles , :only => :index
 
-  resources :decisions, :only => [:index, :show, :new, :create]
+  resources :decisions, :only => [:index, :new, :create]
 
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
