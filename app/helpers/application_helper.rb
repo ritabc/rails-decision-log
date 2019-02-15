@@ -9,7 +9,7 @@ module ApplicationHelper
     link_to url_for(controller: "decisions", action: "index", sort: column, direction: direction), :class => "nav-link #{css_class}" do
       concat(content_tag :span, title, style: "color: #0000EE")
       if css_class
-        concat(image_tag("/assets/sort_icons/#{sort_direction}.png", alt: "#{sort_direction} icon", size: "17x17"))
+        concat(image_tag("/sort_icons/#{sort_direction}.png", alt: "#{sort_direction} icon", size: "17x17"))
       end
     end
   end
