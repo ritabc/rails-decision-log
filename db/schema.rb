@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_10_025150) do
+ActiveRecord::Schema.define(version: 2019_02_15_221724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,6 @@ ActiveRecord::Schema.define(version: 2019_02_10_025150) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "abbreviation"
-    t.string "operational_leader"
-    t.string "elected_representative"
   end
 
   create_table "decisions", force: :cascade do |t|
@@ -40,10 +38,22 @@ ActiveRecord::Schema.define(version: 2019_02_10_025150) do
     t.index ["circle_id"], name: "index_decisions_on_circle_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "type"
+    t.bigint "circles_id"
+    t.bigint "users_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circles_id"], name: "index_roles_on_circles_id"
+    t.index ["users_id"], name: "index_roles_on_users_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
-    t.string "admin_type"
+    t.string "site_amin_type"
     t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
