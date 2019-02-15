@@ -3,7 +3,7 @@ FactoryBot.define do
     email("rita@test.com")
     password("Pa$$word123")
     password_confirmation("Pa$$word123")
-    admin_type("admin")
+    admin_type("leader")
 
   # factory :circle do
   #   name("Land Stewardship")

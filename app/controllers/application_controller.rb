@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
   end
 
   def block_public_viewer
-    # if (current_user.admin_type != 'admin') && (current_user.admin_type != 'super')
     if !current_user
       store_location # Sessions helper that remembers original request url
       flash[:alert] = "You aren't authorized to visit that page"
