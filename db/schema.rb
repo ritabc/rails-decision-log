@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_15_221724) do
+ActiveRecord::Schema.define(version: 2019_02_16_213417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,20 +40,22 @@ ActiveRecord::Schema.define(version: 2019_02_15_221724) do
 
   create_table "roles", force: :cascade do |t|
     t.string "type"
-    t.bigint "circles_id"
-    t.bigint "users_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["circles_id"], name: "index_roles_on_circles_id"
-    t.index ["users_id"], name: "index_roles_on_users_id"
+    t.bigint "circle_id"
+    t.bigint "user_id"
+    t.index ["circle_id"], name: "index_roles_on_circle_id"
+    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
-    t.string "site_amin_type"
+    t.string "site_admin_type"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_initial"
   end
 
 end
