@@ -1,16 +1,12 @@
-<%= render "/layouts/sort_search_nav", locals: {title: "Recent Decisions By Circle", sort_available?: false} %>
+<%= render "/layouts/sort_search_nav", locals: {title: "Hart's Mill Decisions by Circles", sort_available?: false} %>
 <div class="container">
   <% @circles.each do |circle| %>
     <h2><%= circle.name %></h2>
     <p><%= circle.description %></p>
-    <% if Decision.three_most_recent(circle).empty? %>
-      <p>There are not yet decisions for this circle.</p>
-    <% else %>
-      <ul>
-        <% Decision.three_most_recent(circle).each do |decision| %>
-          <li><%= decision.name %></li>
-        <% end %>
-      </ul>
+    <% circle.decisions.each do |decision| %>
+      <h4><%= decision.name %></h4>
+      <p><%= decision.description %></p>
     <% end %>
+    ~~~~~~~
   <% end %>
 </div>
