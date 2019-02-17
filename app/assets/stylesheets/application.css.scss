@@ -4,7 +4,13 @@
 *= require tempusdominus-bootstrap-4
 */
 
+.custom-hr-right {
+  text-align: right;
+}
 
-#new-decision {
-  margin-bottom: 30px;
+// Disappear the custom-hr-right when under width 650px
+@media (max-width: 650px) {
+  .custom-hr-right {
+    display: none;
+  }
 }

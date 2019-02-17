@@ -4,30 +4,47 @@
 <div class="container">
   <% @decisions.each do |decision| %>
     <div class="each-decision">
-      <h5><strong><%= decision.name %></strong></h5>
-      <span>Decided: <i><%= decision.date_decided %></i>, <%= decision.circle.name %></span>
-      <br>
-      <% if decision.review_by_date %>
-        <span>Review on: <%= decision.review_by_date %></span>
-      <% end %>
-      <p><%= decision.description %></p>
-      <% if decision.has_doc?('one') || decision.has_doc?('two') %>
-        <strong>Supporting Documents:</strong>
-        <% if decision.has_doc?('one') %>
+      <div class="decision-and-actions row">
+        <div decision class="decision-body col-md-9">
+          <h5><strong><%= decision.name %></strong></h5>
+          <span>Decided: <i><%= decision.date_decided %></i>, <%= decision.circle.name %></span>
+          <br>
+          <% if decision.review_by_date %>
+            <span>Review on: <%= decision.review_by_date %></span>
+          <% end %>
+          <p><%= decision.description %></p>
+          <% if decision.has_doc?('one') || decision.has_doc?('two') %>
+            <strong>Supporting Documents:</strong>
+            <% if decision.has_doc?('one') %>
+              <span>
+                <%= link_to "#{decision.supp_doc_one_type}", decision.supp_doc_one_link, target: :_blank %>
+              </span>
+            <% end %>
+            <% if decision.has_doc?('two') %>
+              | <span>
+                <%= link_to "#{decision.supp_doc_two_type}", decision.supp_doc_two_link, target: :_blank %>
+              </span>
+            <% end %>
+            <i>(Note: These may require OnlyOffice login)</i>
+          <% end %>
+        </div>
+        <div class="actions col-md-3 text-center my-auto">
+          <%= link_to "Edit", edit_decision_path(decision), { class: "btn btn-info" } %>
+          <%= link_to "Delete", decision_path(decision), { :data => { confirm: "You sure?", method: "delete" }, class: "btn btn-danger" } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="custom-hr-left col-sm-6">
           <span>
-            <%= link_to "#{decision.supp_doc_one_type}", decision.supp_doc_one_link, target: :_blank %>
+            ~~~~~~~~~~~~~~~~~~~~~
           </span>
-        <% end %>
-        <% if decision.has_doc?('two') %>
-          | <span>
-            <%= link_to "#{decision.supp_doc_two_type}", decision.supp_doc_two_link, target: :_blank %>
+        </div>
+        <div class="custom-hr-right col-sm-6">
+          <span>
+            ~~~~~~~~~~~~~~~~~~~~~
           </span>
-        <% end %>
-        <i>(Note: These may require OnlyOffice login)</i>
-      <% end %>
-      <p class="custom-hr">
-        ~~~~~~~~~~~~~~~
-      </p>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
