@@ -19,20 +19,20 @@ class DecisionsController < ApplicationController
   def create
     @decision = Decision.new(decision_params)
     # TODO: Remove following lines from controller (Method: format_date ?)
-    if @decision.date_decided
+    if decision_params["date_decided"].present?
       @decision.date_decided = Date.strptime(decision_params["date_decided"], '%m/%d/%Y')
     end
     # TODO: Make following conditional ternary
-    if @decision.review_by_date
+    if decision_params["review_by_date"].present?
       @decision.review_by_date = Date.strptime(decision_params["review_by_date"], '%m/%d/%Y')
     else
       @decision.review_by_date = nil
     end
     if @decision.save
       flash[:notice] = "Decision successfully added!"
-      redirect_to root # TODO: Should probably direct to that added decision OR the new_decision_path so user can add another (if go this route, make flash more noticeable)
+      redirect_to '/' # TODO: Should probably direct to that added decision OR the new_decision_path so user can add another (if go this route, make flash more noticeable)
     else
-      flash[:alert] = "Please try again - no decision was added"
+      flash[:alert] = "Please try again - no decision was added."
       redirect_to new_decision_path  # Using render here only renders the view, doesn't hit the Decisions#Create controller action, so @circles which is necessary in the view, won't exist
     end
   end
@@ -46,11 +46,11 @@ class DecisionsController < ApplicationController
     @decision = Decision.find(params[:id])
 
     # TODO: Remove following lines from controller (Method: format_date ?)
-    if @decision.date_decided
+    if decision_params["date_decided"].present?
       @decision.date_decided = Date.strptime(decision_params["date_decided"], '%m/%d/%Y')
     end
     # TODO: Make following conditional ternary
-    if @decision.review_by_date
+    if decision_params["review_by_date"].present?
       @decision.review_by_date = Date.strptime(decision_params["review_by_date"], '%m/%d/%Y')
     else
       @decision.review_by_date = nil
@@ -58,7 +58,7 @@ class DecisionsController < ApplicationController
 
     if @decision.update(decision_params)
       flash[:notice] = "Decision successfully updated!"
-      redirect_to root
+      redirect_to '/'
     else
       flash[:alert] = "Please try again - decision was not updated"
       redirect_to edit_decision_path
