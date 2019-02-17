@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg">
   <span class="navbar-brand">
-    <% if searching? %>
+    <% if params[:search].present? %>
       <h1>Results for: '<%= params[:search] %>'</h1>
     <% else %>
       <h1><%= locals[:title] %></h1>
@@ -10,8 +10,8 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-<!-- On /circles page, do I have any search params? -->
-  <% if !searching? && locals[:sort_available?] %>
+<!-- If I should be able to sort (as in, searching isn't happening, and I'm on a page that allows sorting...) -->
+  <% if !params[:search].present? && locals[:sort_available?] %>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item"><%= sortable "name", "Name" %></li>

@@ -3,7 +3,7 @@ class DecisionsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    if searching?
+    if params[:search].present?
       @decisions = Decision.name_description_search(params[:search])
     else
       # Sort by lowercase name or regular date/circle
