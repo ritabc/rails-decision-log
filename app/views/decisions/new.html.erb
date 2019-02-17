@@ -1,4 +1,9 @@
 <div class="container">
   <h1>Log a New Decision</h1>
-  <%= render "decisions/form" %>
+
+  <%= form_for @decision do |f| %>
+    <%= render partial: "/decisions/form", locals: {f: f} %>
+    <%= submit_tag("Log Decision", class: "btn btn-primary") %>
+  <% end %>
+
 </div>

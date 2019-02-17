@@ -1,70 +1,58 @@
-<%= form_for @decision do %>
-
-  <h2>Decision Details</h2>
-
-  <div class="form-row">
-    <div class="form-group col-md-5">
-      <%= label_tag('decision[name]', "Name") %>
-      <%= text_field_tag 'decision[name]', "", class: 'form-control mb-2 mr-sm-2' %>
-    </div>
-
-    <div class="form-group col-md-4">
-      <%= label_tag('decision[circle_id]', "Deciding Circle") %>
-      <%= select_tag('decision[circle_id]', options_for_select(@circles.map {|circle| [circle.name, circle.id]}), class: "form-control mb-2 mr-sm-2") %>
-    </div>
-
-    <div class="form-group col-md-3">
-      <label for="decision[date_decided]">Date Decided (Required)</label>
-      <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-        <input type="text" name="decision[date_decided]" class="form-control datetimepicker-input mb-2 mr-sm-2" data-target="#datetimepicker1">
-        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-          <div class="input-group-text"><span class="fas fa-calendar"></span></div>
-        </div>
-      </div>
-    </div>
+<h2>Decision Details</h2>
+<div class="form-row">
+  <div class="form-group col-md-5">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control mb-2 mr-sm-2" %>
   </div>
 
-  <div class="form-row">
-
-    <div class="form-group col-md-9">
-      <%= label_tag('decision[description]', "Description") %>
-      <span><em>(Viewable by all visitors to this site)</em></span>
-      <%= text_area_tag('decision[description]', "", class: "form-control", size: "100x5") %>
-    </div>
-
-    <div class="form-group col-md-3">
-      <label for="decision[review_by_date]">Review On (Optional)</label>
-      <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-        <input type="text" name="decision[review_by_date]" class="form-control datetimepicker-input mb-2 mr-sm-2" data-target="#datetimepicker2">
-        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-          <div class="input-group-text"><span class="fas fa-calendar"></span></div>
-        </div>
-      </div>
-    </div>
+  <div class="form-group col-md-4">
+    <%= f.label :circle_id, "Deciding Circle" %>
+    <%= f.select :circle_id, @circles.map { |circle| [circle.name, circle.id] }, {}, { class: "form-control mb-2 mr-sm-2" } %>
   </div>
 
-  <h2>Supporting Documents (Optional)</h2>
-  <p><em>(Eg: Minutes, Rejected Proposal, or Accepted Proposal from OnlyOffice. Note: these will be viewable only by those able to log in to OnlyOffice)</em></p>
-  <div class="form-row">
-    <div class="form-group col-md-4">
-      <%= label_tag('decision[supp_doc_one_type]', "Document 1 Type") %>
-      <%= text_field_tag('decision[supp_doc_one_type]', "", class: 'form-control mb-2 mr-sm-2') %>
-    </div>
-    <div class="form-group col-md-8">
-      <%= label_tag('decision[supp_doc_one_link]', "Link") %>
-      <%= text_field_tag('decision[supp_doc_one_link]', "", class: 'form-control mb-2 mr-sm-2') %>
+  <div class="form-group col-md-3">
+    <%= f.label :date_decided, "Date Decided (Required)" %>
+    <div class="input-group">
+      <%= f.date_field :date_decided, class: "form-control mb-2 mr-sm-2" %>
     </div>
   </div>
-  <div class="form-row">
-    <div class="form-group col-md-4">
-      <%= label_tag('decision[supp_doc_two_type]', "Document 2 Type") %>
-      <%= text_field_tag('decision[supp_doc_two_type]', "", class: 'form-control mb-2 mr-sm-2') %>
-    </div>
-    <div class="form-group col-md-8">
-      <%= label_tag('decision[supp_doc_two_link]', "Link") %>
-      <%= text_field_tag('decision[supp_doc_two_link]', "", class: 'form-control mb-2 mr-sm-2') %>
-    </div>
+</div>
+
+<div class="form-row">
+
+  <div class="form-group col-md-9">
+    <%= f.label :description %>
+    <span><em>(Viewable by all visitors to this site)</em></span>
+    <%= f.text_area :description, { class: "form-control", size: "100x5" }%>
   </div>
 
-  <%= submit_tag("Log Decision", class: "btn btn-primary") %>
-<% end %>
+  <div class="form-group col-md-3">
+    <%= f.label :review_by_date, "Review On (Optional)" %>
+    <div class="input-group">
+      <%= f.date_field :review_by_date, class: "form-control mb-2 mr-sm-2" %>
+    </div>
+  </div>
+</div>
+
+<h2>Supporting Documents (Optional)</h2>
+<p><em>(Eg: Minutes, Rejected Proposal, or Accepted Proposal from OnlyOffice. Note: these will be viewable only by those able to log in to OnlyOffice)</em></p>
+<div class="form-row">
+  <div class="form-group col-md-4">
+    <%= f.label(:supp_doc_one_type, "Document 1 Type") %>
+    <%= f.text_field(:supp_doc_one_type, class: 'form-control mb-2 mr-sm-2') %>
+  </div>
+  <div class="form-group col-md-8">
+    <%= f.label(:supp_doc_one_link, "Link") %>
+    <%= f.text_field(:supp_doc_one_link, class: 'form-control mb-2 mr-sm-2') %>
+  </div>
+</div>
+<div class="form-row">
+  <div class="form-group col-md-4">
+    <%= f.label(:supp_doc_two_type, "Document 2 Type") %>
+    <%= f.text_field(:supp_doc_two_type, class: 'form-control mb-2 mr-sm-2') %>
+  </div>
+  <div class="form-group col-md-8">
+    <%= f.label(:supp_doc_two_link, "Link") %>
+    <%= f.text_field(:supp_doc_two_link, class: 'form-control mb-2 mr-sm-2') %>
+  </div>
+</div>

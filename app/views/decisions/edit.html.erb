@@ -1,4 +1,9 @@
 <div class="container" id="new-decision">
   <h1>Edit the Decision: <%= @decision.name %></h1>
-  <%= render "decisions/form" %>
+
+  <%= form_for @decision do |f| %>
+    <%= render partial: "/decisions/form", locals: {f: f} %>
+    <%= submit_tag("Update Decision", class: "btn btn-primary") %>
+  <% end %>
+
 </div>

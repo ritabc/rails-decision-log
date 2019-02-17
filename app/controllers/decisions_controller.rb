@@ -18,16 +18,6 @@ class DecisionsController < ApplicationController
 
   def create
     @decision = Decision.new(decision_params)
-    # TODO: Remove following lines from controller (Method: format_date ?)
-    if decision_params["date_decided"].present?
-      @decision.date_decided = Date.strptime(decision_params["date_decided"], '%m/%d/%Y')
-    end
-    # TODO: Make following conditional ternary
-    if decision_params["review_by_date"].present?
-      @decision.review_by_date = Date.strptime(decision_params["review_by_date"], '%m/%d/%Y')
-    else
-      @decision.review_by_date = nil
-    end
     if @decision.save
       flash[:notice] = "Decision successfully added!"
       redirect_to '/' # TODO: Should probably direct to that added decision OR the new_decision_path so user can add another (if go this route, make flash more noticeable)
@@ -44,18 +34,6 @@ class DecisionsController < ApplicationController
 
   def update
     @decision = Decision.find(params[:id])
-
-    # TODO: Remove following lines from controller (Method: format_date ?)
-    if decision_params["date_decided"].present?
-      @decision.date_decided = Date.strptime(decision_params["date_decided"], '%m/%d/%Y')
-    end
-    # TODO: Make following conditional ternary
-    if decision_params["review_by_date"].present?
-      @decision.review_by_date = Date.strptime(decision_params["review_by_date"], '%m/%d/%Y')
-    else
-      @decision.review_by_date = nil
-    end
-
     if @decision.update(decision_params)
       flash[:notice] = "Decision successfully updated!"
       redirect_to '/'
