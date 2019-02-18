@@ -11,7 +11,10 @@ FactoryBot.define do
     site_admin_type { "leader" }
 
     trait :with_many_circles do
-      circles { create_list :circle, 6 }
+      transient do
+        circles_count { 5 }
+      end
+      circles { create_list :circle, circles_count }
     end
 
     ## Factory for User type: 'super'
@@ -36,18 +39,14 @@ FactoryBot.define do
     name { "Land Stewardship" }
     description { "This is the description for land stewardship" }
 
-    ## Factory for Circle with Decisions
-    factory :circle_with_decisions do
+    ## Trait :with_many_decisions Decisions
+    trait :with_decisions do
 
       # Add transient atttributes (data which aren't attributes on the model)
       transient do
         decisions_count { 5 }
       end
-
-      ## After creating the circle, add 2 decisions to that circle
-      after(:create) do |circle, factory_values|
-        create_list(:decision, factory_values.decisions_count, circle: circle)
-      end
+      decisions { create_list :decision, decisions_count }
     end
 
   end

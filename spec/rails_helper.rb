@@ -53,7 +53,7 @@ RSpec.configure do |config|
   #       # ...
   #     end
   #
-  config.expect_with(:rspec) { |c| c.syntax = :should }
+  config.expect_with(:rspec) { |c| c.syntax = [:should, :expect] }
 
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs

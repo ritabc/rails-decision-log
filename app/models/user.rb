@@ -5,11 +5,11 @@ class User < ApplicationRecord
   has_secure_password
 
   def leader?
-    user.site_admin_type == 'leader'
+    site_admin_type == 'leader'
   end
 
   def super?
-    user.site_admin_type == 'super'
+    site_admin_type == 'super'
   end
 
 end

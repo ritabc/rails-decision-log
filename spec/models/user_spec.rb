@@ -7,7 +7,7 @@ describe User do
   it { should validate_uniqueness_of(:email).case_insensitive }
   it { should validate_confirmation_of :password }
 
-  it 'test user authentication' do
+  it 'tests authentication' do
     test_user = create(:leader)
     expect(User.find_by(email: test_user.email).try(:authenticate, test_user.password)).to eq(test_user)
   end
@@ -21,25 +21,11 @@ describe User do
     expect(leader_with_many_circles).to be_valid
   end
   it 'can belong to many circles' do
-    expect(leader_with_many_circles.circles.count).to eq 6
+    expect(leader_with_many_circles.circles.count).to eq 5
   end
   it 'creates a leader not belonging to a certain circle' do
     leaderless_circle = create :circle, name: "Leaderless Circle"
     expect(leader_with_many_circles.circles.include?(leaderless_circle)).to eq false
-  end
-
-  context 'viewer (not logged in)' do
-    it 'cannot add decisions' do
-      visit new_decision_path
-      expect(page).to have_content "You aren't authorized to visit that page"
-    end
-
-    it 'cannot edit decisions' do
-      decision = create :decision
-      visit edit_decision_path(decision)
-      expect(page).to have_content "You aren't authorized to visit that page"
-    end
-
   end
 
   context 'logged in as Leader' do
