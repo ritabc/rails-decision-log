@@ -17,11 +17,7 @@ describe Decision do
   #
   # end
 
-  ## Tests (initial) for FactoryBot Associations
-  it 'counts decisions associated with circle' do
-    circle_with_decisions = FactoryBot.create(:circle_with_decisions, decisions_count: 2)
-    expect(circle_with_decisions.decisions.count).to eq 2
-  end
+
 
 
 end

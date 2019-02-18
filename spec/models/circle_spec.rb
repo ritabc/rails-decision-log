@@ -7,6 +7,11 @@ describe Circle do
   it { should validate_presence_of :name }
   it { should validate_presence_of :description }
 
+  it 'has associated decisions' do
+    circle_with_decisions = create :circle_with_decisions, decisions_count: 2
+    expect(circle_with_decisions.decisions.count).to eq 2
+  end
+
   # it 'will test the three_most_recent scope using FactoryBot' do
   #   test_circle = FactoryBot.create(:circle)
   #   test_decision1 = FactoryBot.create(:decision)
