@@ -10,11 +10,16 @@ FactoryBot.define do
     password_confirmation { "Pa$$word123" }
     site_admin_type { "leader" }
 
+    trait :with_many_circles do
+      circles { create_list :circle, 6 }
+    end
+
     ## Factory for User type: 'super'
     ## (May not be proper way to create super - will super inherit email/password attributes from leader?)
     factory :super do
       site_adming_type { "super" }
     end
+
   end
 
   ## Factory for Decision, which belongs_to a Circle
@@ -44,6 +49,7 @@ FactoryBot.define do
         create_list(:decision, factory_values.decisions_count, circle: circle)
       end
     end
+
   end
 
   ## Factory for Role type OL
