@@ -38,4 +38,7 @@ describe User do
     end
   end
 
+  it 'creates a leader with valid roles from factory' do
+    expect(leader_with_many_circles.roles.count).to eq 5
+  end
 end

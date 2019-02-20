@@ -29,10 +29,10 @@
           <% end %>
         </div>
         <div class="actions col-md-3 text-center my-auto">
-          <% if allow? "decisions", "edit" %>
+          <% if allow? "decisions", "edit", decision %>
             <%= link_to "Edit", edit_decision_path(decision), { class: "btn btn-info" } %>
           <% end %>
-          <% if allow? "decisions", "destroy" %>
+          <% if allow? "decisions", "destroy", decision %>
             <%= link_to "Delete", decision_path(decision), { :data => { confirm: "You sure?", method: "delete" }, class: "btn btn-danger" } %>
           <% end %>
         </div>

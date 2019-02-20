@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def currently_super_admin?
     if !current_user && !(current_user.site_admin_type == 'super')
-      flash[:alert] = "You're not authorized to visit that page"
+      flash[:alert] = "You aren't authorized to visit that page"
       redirect_to '/'
     else
       true
@@ -27,8 +27,12 @@ private
     @current_permission ||= Permission.new(current_user)
   end
 
+  def current_resource
+    nil
+  end
+
   def authorize
-    unless current_permission.allow?(params[:controller], params[:action])
+    unless current_permission.allow?(params[:controller], params[:action], current_resource)
       store_location # Sessions helper that remembers original request url
       flash[:alert] = "You aren't authorized to visit that page"
       redirect_to signin_path

@@ -5,6 +5,14 @@ FactoryBot.define do
     "rita#{n}@test.com"
   end
 
+  ## Factory for Decision, which belongs_to a Circle
+  factory :decision do
+    name { "Dig a well" }
+    description { "We decided to dig a well, and cover it with a pump house" }
+    date_decided { Date.new(2016,5,27) }
+    circle
+  end
+
   ## Factory for User type: 'leader'
   factory :leader, class: User do
     email { generate(:email) }
@@ -31,14 +39,6 @@ FactoryBot.define do
       site_admin_type { "super" }
     end
 
-  end
-
-  ## Factory for Decision, which belongs_to a Circle
-  factory :decision do
-    name { "Dig a well" }
-    description { "We decided to dig a well, and cover it with a pump house" }
-    date_decided { Date.new(2016,5,27) }
-    circle
   end
 
   ## Factory for Circle (both with and without associated Decisions)

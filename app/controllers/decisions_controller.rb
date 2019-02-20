@@ -28,11 +28,11 @@ class DecisionsController < ApplicationController
 
   def edit
     @circles = Circle.all
-    @decision = Decision.find(params[:id])
+    @decision = current_resource
   end
 
   def update
-    @decision = Decision.find(params[:id])
+    @decision = current_resource
     if @decision.update(decision_params)
       flash[:notice] = "Decision successfully updated!"
       redirect_to '/'
@@ -43,7 +43,7 @@ class DecisionsController < ApplicationController
   end
 
   def destroy
-    @decision = Decision.find(params[:id])
+    @decision = current_resource
     @decision.destroy
     redirect_to decisions_path
   end
@@ -52,6 +52,10 @@ private
 
   def decision_params
     params.require(:decision).permit(:name, :date_decided, :circle_id, :description, :review_by_date, :supp_doc_one_link, :supp_doc_one_type, :supp_doc_two_link, :supp_doc_two_type)
+  end
+
+  def current_resource
+    @current_resource ||= Decision.find(params[:id]) if params[:id]
   end
 
   def sort_column
