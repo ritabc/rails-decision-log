@@ -1,20 +1,28 @@
 
 FactoryBot.define do
 
+  sequence :email do |n|
+    "rita#{n}@test.com"
+  end
+
   ## Factory for User type: 'leader'
   factory :leader, class: User do
-    email { "rita@test.com" }
+    email { generate(:email) }
     first_name { "Rita" }
     last_initial { "BC" }
     password { "Pa$$word123" }
     password_confirmation { "Pa$$word123" }
     site_admin_type { "leader" }
 
+    # Ability for user to have many circles, through roles
     trait :with_many_circles do
-      transient do
-        circles_count { 5 }
+      after :create do |leader|
+        circles = create_list :circle, 5
+        circles.map do |circle|
+          create(:role, circle: circle, user: leader)
+        end
+        leader.circles = circles
       end
-      circles { create_list :circle, circles_count }
     end
 
     ## Factory for User type: 'super'
@@ -38,6 +46,7 @@ FactoryBot.define do
   factory :circle do
     name { "Land Stewardship" }
     description { "This is the description for land stewardship" }
+    abbreviation { "LS "}
 
     ## Trait :with_many_decisions Decisions
     trait :with_decisions do
@@ -48,11 +57,11 @@ FactoryBot.define do
       end
       decisions { create_list :decision, decisions_count }
     end
-
   end
 
-  ## Factory for Role type OL
-  factory :lsc_ol do
-    type { "operational_leader" }
+  factory :role do
+    role_type { "Operational Leader" }
+    circle
+    association :user, factory: :leader
   end
 end
