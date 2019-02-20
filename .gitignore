@@ -28,3 +28,6 @@
 
 /db/seeds/admins.rb
 /zNotes/*
+
+# Ignore coverage folder
+/coverage
