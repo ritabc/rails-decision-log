@@ -7,8 +7,8 @@ class Permission
     allow [:decisions, :circles], :index
     if user
       allow_all if super?(user)
-      allow :circles, [:new, :create]
-      allow :decisions, [:new, :create, :edit, :update, :destroy] do |decision|
+      allow [:decisions, :circles], [:new, :create]
+      allow :decisions, [:edit, :update, :destroy] do |decision|
         # binding.pry
         decision.circle.in?(user.circles)
       end
@@ -53,6 +53,6 @@ end
 #   @circle.decisions.count > 0
 # end
 
-def leader?
-  site_admin_type == 'leader'
-end
+# def leader?
+#   site_admin_type == 'leader'
+# end
