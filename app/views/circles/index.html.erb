@@ -1,12 +1,35 @@
 <%= render "/layouts/sort_search_nav", locals: {title: "Hart's Mill Decisions by Circles", sort_available?: false} %>
 <div class="container">
-  <% @circles.each do |circle| %>
-    <h2><%= circle.name %></h2>
-    <p><%= circle.description %></p>
-    <% circle.decisions.each do |decision| %>
-      <h4><%= decision.name %></h4>
-      <p><%= decision.description %></p>
-    <% end %>
-    ~~~~~~~
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Circle</th>
+        <th scope="col">OLs/ERs/Admins</th>
+        <th scope="col">Description</th>
+        <th scope="col">Decisions</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @circles.each do |circle| %>
+        <tr>
+          <td scope="row"><%= circle.abbreviation %></td>
+          <td><%= circle.name %></td>
+          <td>
+            <% circle.roles.each do |role| %>
+              <span><%= role.role_type %>: </span>
+              <span><%= role.user.first_name %> </span>
+              <span><%= role.user.last_initial %></span>
+              <br>
+            <% end %>
+          </td>
+          <td><%= circle.description %></td>
+          <td><%= link_to circle.abbreviation + " Decisions", "#", { class: "btn btn-primary" } %></td>
+          <td><%= link_to "Edit", edit_circle_path(circle), { class: "btn btn-info" } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 </div>

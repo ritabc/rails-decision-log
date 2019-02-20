@@ -59,8 +59,7 @@
 1. Make changes and submit a PR
 1. To create leaders (admin types) using the Rails Console:
   * Run `rails c`
-  * Use this template for creating site admins: ```site_admins = User.create!([{email: 'your_email', password: 'a_password', password_confirmation: 'a_password', admin_type: 'super'}])```
-  * Run `rails db:test:prepare`
+  * See seeds file for commands for creating fake admin data
 
 ## Notes about the application
 * Ruby v. 2.5.3

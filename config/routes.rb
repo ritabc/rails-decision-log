@@ -2,14 +2,15 @@ Rails.application.routes.draw do
 
   root :to => 'decisions#index'
 
-  resources :circles , :only => :index
+  resources :circles , except: :show
 
   resources :decisions, except: :show
+
+  resources :users, except: :show
 
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'
   get '/signout' => 'sessions#destroy'
 
-  resources :users, :only => [:index, :show, :new, :create]
 
 end

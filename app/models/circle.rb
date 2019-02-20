@@ -4,5 +4,6 @@ class Circle < ApplicationRecord
   has_many :users, through: :roles
 
   validates :name, :presence => true
+  validates :abbreviation, :presence => true
   validates :description, :presence => true
 end

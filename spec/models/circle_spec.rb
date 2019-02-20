@@ -6,6 +6,7 @@ describe Circle do
   it { should have_many :users }
   it { should validate_presence_of :name }
   it { should validate_presence_of :description }
+  it { should validate_presence_of :abbreviation }
 
   it 'has associated decisions' do
     circle_with_decisions = create :circle_with_decisions, decisions_count: 2
