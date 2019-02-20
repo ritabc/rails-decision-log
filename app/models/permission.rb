@@ -33,12 +33,10 @@ class Permission
   # end
 
   def allow? (controller, action)
-    if user.nil?
-      controller == "decisions" && action == "index"
-    else
-      true
-    end
-
+    return true if controller == "sessions"
+    return true if controller == "decisions" && action == "index"
+    return true if user
+    false
   end
 
 private

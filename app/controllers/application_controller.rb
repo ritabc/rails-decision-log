@@ -2,7 +2,9 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   protect_from_forgery with: :exception
   helper_method :current_user, :currently_super_admin?
-  # before_action :authorize
+  before_action :authorize
+  delegate :allow?, to: :current_permission
+  helper_method :allow?
 
   def current_user
     if session[:user_id]
@@ -12,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def currently_super_admin?
     if !current_user && !(current_user.site_admin_type == 'super')
-      flash[:alert] = "You aren't authorized to visit that page"
+      flash[:alert] = "You're not authorized to visit that page"
       redirect_to '/'
     else
       true
@@ -20,5 +22,17 @@ class ApplicationController < ActionController::Base
   end
 
 private
+
+  def current_permission
+    @current_permission ||= Permission.new(user: current_user)
+  end
+
+  def authorize
+    unless current_permission.allow?(params[:controller], params[:action])
+      store_location # Sessions helper that remembers original request url
+      flash[:alert] = "You aren't authorized to visit that page"
+      redirect_to signin_path
+    end
+  end
 
 end
