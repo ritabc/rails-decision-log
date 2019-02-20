@@ -20,7 +20,7 @@ FactoryBot.define do
     ## Factory for User type: 'super'
     ## (May not be proper way to create super - will super inherit email/password attributes from leader?)
     factory :super do
-      site_adming_type { "super" }
+      site_admin_type { "super" }
     end
 
   end

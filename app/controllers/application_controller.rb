@@ -21,17 +21,4 @@ class ApplicationController < ActionController::Base
 
 private
 
-  def current_permission
-    @current_permission ||= Permission.new(user: current_user, circle: nil, decision: nil)
-  end
-
-  def authorize
-    unless current_permission.allow?(params[:controller], params[:action])
-      store_location # Sessions helper that remembers original request url
-      flash[:alert] = "You aren't authorized to visit that page"
-      redirect_to signin_path
-    end
-  end
-
-
 end

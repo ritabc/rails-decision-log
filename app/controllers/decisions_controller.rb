@@ -1,6 +1,9 @@
 class DecisionsController < ApplicationController
   helper_method :sort_column, :sort_direction
   before_action :authorize
+  delegate :allow?, to: :current_permission
+  helper_method :allow?
+
 
   def index
     if params[:search].present?
@@ -65,6 +68,18 @@ private
 
   def sorting_by_name?
     sort_column == "name"
+  end
+
+  def current_permission
+    @current_permission ||= Permission.new(user: current_user)
+  end
+
+  def authorize
+    unless current_permission.allow?(params[:controller], params[:action])
+      store_location # Sessions helper that remembers original request url
+      flash[:alert] = "You aren't authorized to visit that page"
+      redirect_to signin_path
+    end
   end
 
 end
