@@ -1,5 +1,6 @@
 class DecisionsController < ApplicationController
   helper_method :sort_column, :sort_direction
+  before_action :authorize
 
   def index
     if params[:search].present?
@@ -65,4 +66,5 @@ private
   def sorting_by_name?
     sort_column == "name"
   end
+
 end

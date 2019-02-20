@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   protect_from_forgery with: :exception
   helper_method :current_user, :currently_super_admin?
-  before_action :authorize
+  # before_action :authorize
 
   def current_user
     if session[:user_id]
@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 private
 
   def current_permission
-    @current_permission ||= Permission.new(current_user)
+    @current_permission ||= Permission.new(user: current_user, circle: nil, decision: nil)
   end
 
   def authorize

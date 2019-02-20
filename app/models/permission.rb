@@ -7,7 +7,6 @@ class Permission
     @decision = attributes.fetch(:decision)
   end
 
-  # TODO: Refactor when Done with all 'Modules' (Decisions/Circles,Users), and either organize by module, ie controller at top of nesting, or reflext organization of permission_spec.rb
   def allow?(controller, action)
     return true if controller == "sessions"
     return true if controller == "decisions" && action == "index"
