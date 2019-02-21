@@ -41,7 +41,7 @@ describe Permission do
 
   context 'User logged in as leader' do
 
-    subject { Permission.new(create(:leader)) }
+    subject { Permission.new(create(:leader_with_circles)) }
 
     it { should allow(:decisions, :index) }
 
@@ -75,7 +75,7 @@ describe Permission do
       # Associate a circle with leader through role
       let(:leader_of_associated_circle) do
         # create leader with many_circles
-        leader = create(:leader, :with_many_circles)
+        leader = create(:leader_with_circles)
         leaders_circle = leader.circles.first
         leaders_circle.decisions.push(associated_decision)
         role = create(:role, circle: leaders_circle, user: leader)
@@ -90,8 +90,8 @@ describe Permission do
       it { should allow(:decisions, :edit, associated_decision) }
       it { should allow(:decisions, :update, associated_decision) }
       it { should allow(:decisions, :destroy, associated_decision) }
-      it { should_not allow(:decisions, :new, non_associated_decision) }
-      it { should_not allow(:decisions, :create, non_associated_decision) }
+      it { should allow(:decisions, :new, non_associated_decision) }
+      it { should allow(:decisions, :create, non_associated_decision) }
       it { should_not allow(:decisions, :edit, non_associated_decision) }
       it { should_not allow(:decisions, :update, non_associated_decision) }
       it { should_not allow(:decisions, :destroy, non_associated_decision) }

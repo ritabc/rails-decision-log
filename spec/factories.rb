@@ -14,7 +14,7 @@ FactoryBot.define do
   end
 
   ## Factory for User type: 'leader'
-  factory :leader, class: User do
+  factory :leader_with_circles, class: User do
     email { generate(:email) }
     first_name { "Rita" }
     last_initial { "BC" }
@@ -22,14 +22,13 @@ FactoryBot.define do
     password_confirmation { "Pa$$word123" }
     site_admin_type { "leader" }
 
-    # Ability for user to have many circles, through roles
-    trait :with_many_circles do
-      after :create do |leader|
-        circles = create_list :circle, 5
-        circles.map do |circle|
-          create(:role, circle: circle, user: leader)
+    # Any user must belong to at least one circle, through roles
+    before :create do |user|
+      circles = create_list :circle, 5
+      circles.map do |circle|
+        unless circle.roles.users.include?(user)
+          create(:role, circle: circle, user: user)
         end
-        leader.circles = circles
       end
     end
 
