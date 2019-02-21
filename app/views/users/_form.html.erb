@@ -36,7 +36,11 @@
     <p>Circles the User is Involved In</p>
     <% @circles.each do |circle| %>
       <div class="form-check">
-        <%= f.check_box :circles, { class: "form-check-input", value: "#{circle.id}", id: "checkbox-#{circle.abbreviation}" } %>
+        <% if @user.circles.include?(circle) %>
+          <%= f.check_box :circles, { class: "form-check-input", value: "#{circle.id}", id: "checkbox-#{circle.abbreviation}", checked: true } %>
+        <% else %>
+          <%= f.check_box :circles, { class: "form-check-input", value: "#{circle.id}", id: "checkbox-#{circle.abbreviation}" } %>
+        <% end %>
         <%= f.label :circles, "#{circle.name}", { class: "form-check-label", for: "checkbox-#{circle.abbreviation}" } %>
       </div>
     <% end %>

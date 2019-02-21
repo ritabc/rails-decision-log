@@ -10,6 +10,16 @@ class UsersController < ApplicationController
     @circles = Circle.all
   end
 
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      flash[:notice] = "User successfully added!"
+      redirect to '/'
+    else
+      flash[:alert] = "Please try again - no user was added"
+      redirect_to new_user_path
+    end
+  end
 
   def edit
     @user = User.find(params[:id])
