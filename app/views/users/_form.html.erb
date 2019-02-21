@@ -1,0 +1,45 @@
+<h2>User Details</h2>
+<div class="form-row">
+  <div class="form-group col-md-4">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group col-md-3">
+    <%= f.label :last_initial %>
+    <%= f.text_field :last_initial, class: "form-control" %>
+  </div>
+
+  <div class="form-group col-md-5">
+    <%= f.label :email %>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-7">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: "form-control", disabled: true %>
+  </div>
+
+  <div class="form-group col-md-4">
+    <p>Give User Super Admin Capabilities?</p>
+    <div class="custom-control custom-switch">
+      <%= f.check_box :site_admin_type, { class: "custom-control-input" } %>
+      <%= f.label :site_admin_type, "Super", class: "custom-control-label" %>
+    </div>
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group">
+    <p>Circles the User is Involved In</p>
+    <% @circles.each do |circle| %>
+      <div class="form-check">
+        <%= f.check_box :circles, { class: "form-check-input", value: "#{circle.id}", id: "checkbox-#{circle.abbreviation}" } %>
+        <%= f.label :circles, "#{circle.name}", { class: "form-check-label", for: "checkbox-#{circle.abbreviation}" } %>
+      </div>
+    <% end %>
+  </div>
+
+</div>

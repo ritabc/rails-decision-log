@@ -7,11 +7,13 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @circles = Circle.all
   end
 
 
   def edit
     @user = User.find(params[:id])
+    @circles = Circle.all
   end
 
   def update
