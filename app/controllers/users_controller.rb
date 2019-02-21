@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       redirect_to edit_decision_path
     end
   end
-
+  
 private
 
   def user_params

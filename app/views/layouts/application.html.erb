@@ -7,20 +7,22 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'datepicker', 'data-turbolinks-track': 'reload' %>
+    <%# <%= javascript_include_tag 'datepicker', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   </head>
 
   <body>
     <nav class="navbar">
       <p><%= link_to "Home", root_path %> </p>
-      <p><%= link_to "All Decisions", decisions_path %></p>
-      <% if current_user && currently_super_admin? %>
+      <p><%= link_to "Circles", circles_path %></p>
+      <% if allow? :users, :index %>
         <p><%= link_to "All Users", users_path %></p>
       <% end %>
-      <% if current_user %>
+      <% if allow? :decisions, :new %>
         <p><%= link_to "Add A Decision", new_decision_path %></p>
-        <p><%= link_to "Log Out", signout_path %></p>
+      <% end %>
+      <% if current_user %>
+        <p>Welcome, <%= current_user.first_name %> | <%= link_to "Log Out", signout_path %></p>
       <% else %>
         <p><%= link_to "Log In", signin_path %> </p>
       <% end %>
