@@ -32,15 +32,15 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'bootstrap-datepicker-rails'
-gem 'bootstrap4-datetime-picker-rails'
+# gem 'bootstrap-datepicker-rails'
+# gem 'bootstrap4-datetime-picker-rails'
 gem 'momentjs-rails', '~> 2.9'
 gem 'moment_timezone-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jquery-rails'
-gem 'bootstrap', '~> 4.1.3'
+gem 'bootstrap', '~> 4.3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'popper_js', '~> 1.14.3'

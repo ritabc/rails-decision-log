@@ -19,5 +19,4 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require moment-timezone
-//= require tempusdominus-bootstrap-4
 //
