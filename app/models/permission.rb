@@ -1,4 +1,5 @@
 class Permission
+  include UserHelper
 
   # Method which happens upon creation of Permission.
   # Uses DSL to state which lists of controllers and actions are allowed
@@ -43,9 +44,9 @@ class Permission
 
 private
 
-  def super?(user)
-    user.site_admin_type == 'super'
-  end
+  # def super?(user)
+  #   user.site_admin_type == 'super'
+  # end
 
 end
 

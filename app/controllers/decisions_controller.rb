@@ -11,7 +11,11 @@ class DecisionsController < ApplicationController
   end
 
   def new
-    @circles = Circle.all
+    if super?(current_user)
+      @circles = Circle.all
+    elsif current_user
+      @circles = current_user.circles
+    end
     @decision = Decision.new
   end
 
