@@ -33,19 +33,20 @@
 
 
   <div class="col-md-5">
-    <p>Circles user is Involved In</p>
+    <p>Circles user is involved in</p>
     <% @circles.each do |circle| %>
-      <div class="form-group">
-        <p><%= circle.name %></p>
-        <%= radio_button :role, :role_type, "1", name: "#{circle.abbreviation}-ol", id: "#{circle.abbreviation}-ol" %>
-        <%= label :role, :role_type, "Operational L.", for: "#{circle.abbreviation}-ol" %>
-        <%= radio_button :role, :role_type, "2", name: "#{circle.abbreviation}-er", id: "#{circle.abbreviation}-er" %>
-        <%= label :role, :role_type, "Elected Repr.", for: "#{circle.abbreviation}-er" %>
-        <%= radio_button :role, :role_type,  "3", name: "#{circle.abbreviation}-admin", id: "#{circle.abbreviation}-admin" %>
-        <%= label :role, :role_type, "Admin", for: "#{circle.abbreviation}-admin" %>
-        <%= radio_button :role, :role_type,  "0", name: "#{circle.name}-none", id: "#{circle.abbreviation}-admin" %>
-        <%= label :role, :role_type, "None", for: "#{circle.abbreviation}-admin" %>
-      </div>
+      <p><%= circle.name %></p>
+      <%= radio_button_tag circle.abbreviation, "ol", false, id: "#{circle.abbreviation}-ol" %>
+      <%= label_tag circle.abbreviation, "Operational Leader", for: "#{circle.abbreviation}-ol" %>
+
+      <%= radio_button_tag circle.abbreviation, "er", false, id: "#{circle.abbreviation}-er" %>
+      <%= label_tag circle.abbreviation, "Elected Representative", for: "#{circle.abbreviation}-er" %>
+
+      <%= radio_button_tag circle.abbreviation, "admin", false, id: "#{circle.abbreviation}-admin" %>
+      <%= label_tag circle.abbreviation, "Administrator", for: "#{circle.abbreviation}-admin" %>
+
+      <%= radio_button_tag circle.abbreviation, "none", true, id: "#{circle.abbreviation}-none" %>
+      <%= label_tag circle.abbreviation, "None", for: "#{circle.abbreviation}-none" %>
     <% end %>
   </div>
 
