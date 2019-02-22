@@ -17,31 +17,34 @@
 </div>
 
 <div class="form-row">
-  <div class="form-group col-md-7">
-    <%= f.label :password %>
-    <%= f.password_field :password, class: "form-control", disabled: true %>
-  </div>
-
-  <div class="form-group col-md-4">
-    <p>Give User Super Admin Capabilities?</p>
-    <div class="custom-control custom-switch">
-      <%= f.check_box :site_admin_type, { class: "custom-control-input" } %>
-      <%= f.label :site_admin_type, "Super", class: "custom-control-label" %>
+  <div class="col-md-7" id="password-super">
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: "form-control"%>
+    </div>
+    <div class="form-group">
+      <p>Should the User be a Super Admin?</p>
+      <div class="custom-control custom-switch">
+        <%= f.check_box :site_admin_type, { class: "custom-control-input" } %>
+        <%= f.label :site_admin_type, "Super", class: "custom-control-label" %>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="form-row">
-  <div class="form-group">
-    <p>Circles the User is Involved In</p>
+
+  <div class="col-md-5">
+    <p>Circles user is Involved In</p>
     <% @circles.each do |circle| %>
-      <div class="form-check">
-        <% if @user.circles.include?(circle) %>
-          <%= f.check_box :circles, { class: "form-check-input", value: "#{circle.id}", id: "checkbox-#{circle.abbreviation}", checked: true } %>
-        <% else %>
-          <%= f.check_box :circles, { class: "form-check-input", value: "#{circle.id}", id: "checkbox-#{circle.abbreviation}" } %>
-        <% end %>
-        <%= f.label :circles, "#{circle.name}", { class: "form-check-label", for: "checkbox-#{circle.abbreviation}" } %>
+      <div class="form-group">
+        <p><%= circle.name %></p>
+        <%= radio_button :role, :role_type, "1", name: "#{circle.abbreviation}-ol", id: "#{circle.abbreviation}-ol" %>
+        <%= label :role, :role_type, "Operational L.", for: "#{circle.abbreviation}-ol" %>
+        <%= radio_button :role, :role_type, "2", name: "#{circle.abbreviation}-er", id: "#{circle.abbreviation}-er" %>
+        <%= label :role, :role_type, "Elected Repr.", for: "#{circle.abbreviation}-er" %>
+        <%= radio_button :role, :role_type,  "3", name: "#{circle.abbreviation}-admin", id: "#{circle.abbreviation}-admin" %>
+        <%= label :role, :role_type, "Admin", for: "#{circle.abbreviation}-admin" %>
+        <%= radio_button :role, :role_type,  "0", name: "#{circle.name}-none", id: "#{circle.abbreviation}-admin" %>
+        <%= label :role, :role_type, "None", for: "#{circle.abbreviation}-admin" %>
       </div>
     <% end %>
   </div>

@@ -8,14 +8,22 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @circles = Circle.all
+    @user.roles.build # Necessary??
   end
 
   def create
     @user = User.new(user_params)
+    if params["user"]["site_admin_type"] == "0"
+      @user.site_admin_type = "leader"
+    elsif params["user"]["site_admin_type"] == "1"
+      @user.site_admin_type == "super"
+    end
+    # push roles into @user.roles
     if @user.save
       flash[:notice] = "User successfully added!"
       redirect to '/'
     else
+      # binding.pry
       flash[:alert] = "Please try again - no user was added"
       redirect_to new_user_path
     end
@@ -40,14 +48,18 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit(:fisrt_name, :last_initial, :email, :site_admin_type)
+    params.require(:user).permit(:first_name, :last_initial, :email, :site_admin_type, roles: [:role_type, :circle_id])
+  end
+
+  def current_resource
+    @current_resource ||= Decision.find(params[:id]) if params[:id]
   end
 
   def associate_super_admin_with_all_circles
-    if super?(current_user)
+    if super?(current_resource) # TODO: If current_resource is super!
       circles = Circle.all
       circles.each do |circle|
-        Role.new(site_admin_type: "admin", circle: circle, user: current_user)
+        Role.new(role_type: "admin", circle: circle, user: current_user)
       end
     end
   end
