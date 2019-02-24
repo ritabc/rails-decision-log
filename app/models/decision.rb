@@ -3,6 +3,7 @@ class Decision < ApplicationRecord
   validates_presence_of :name
   validates_presence_of :description
   validates_presence_of :date_decided
+  validates_presence_of :circle
 
   include PgSearch
   pg_search_scope :custom_search, against: [:name, :description],
