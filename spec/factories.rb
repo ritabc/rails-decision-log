@@ -59,7 +59,7 @@ FactoryBot.define do
   end
 
   factory :role do
-    role_type { "Operational Leader" }
+    role_type { "ol" }
     circle
     association :user, factory: :leader
   end

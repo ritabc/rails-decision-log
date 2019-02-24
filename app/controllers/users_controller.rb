@@ -8,22 +8,36 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @circles = Circle.all
-    @user.roles.build # Necessary??
+    @roles = @user.roles.build # Necessary??
   end
 
   def create
     @user = User.new(user_params)
+
+    # Assign site_admin_type
     if params["user"]["site_admin_type"] == "0"
       @user.site_admin_type = "leader"
     elsif params["user"]["site_admin_type"] == "1"
       @user.site_admin_type == "super"
     end
+
+    # Assign roles, if any
+    circles = Circle.all
+    roles = []
+    circles.each do |circle|
+      role_type = params["#{circle.abbreviation}"]
+      unless role_type == "none"
+        role = Role.new(role_type: role_type, user: @user, circle: circle)
+        roles.push(role)
+      end
+    end
     # push roles into @user.roles
-    if @user.save
+    if @user.save && roles.each { |role| role.save }
+      binding.pry
       flash[:notice] = "User successfully added!"
       redirect to '/'
     else
-      # binding.pry
+      binding.pry
       flash[:alert] = "Please try again - no user was added"
       redirect_to new_user_path
     end
@@ -40,6 +54,7 @@ class UsersController < ApplicationController
       flash[:notice] = "User successfully updated!"
       redirect_to '/'
     else
+      binding.pry
       flash[:alert] = "Please try again - user was not updated"
       redirect_to edit_decision_path
     end
