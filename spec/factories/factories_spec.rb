@@ -1,6 +1,8 @@
+require 'rails_helper'
 
 # Tests that factories are building valid models
 context 'factorybot' do
+
   it 'creates a decision belonging to a circle' do
     decision = build :decision
     expect(decision.circle.name).to eq("Land Stewardship")
