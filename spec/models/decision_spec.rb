@@ -5,9 +5,12 @@ describe Decision do
   it { should validate_presence_of :name }
   it { should validate_presence_of :description }
   it { should validate_presence_of :date_decided }
+  it { should validate_presence_of :circle }
 
-  context 'user interacting with decision', type: :request do
-    it 'can edit own circles decisions' do
+
+  # Needs editing or removing in favor of permissions_spec
+  context 'being interacted with by user', type: :request do
+    it 'who can edit own circles decisions' do
       # create leader with many_circles and a decision
       associated_decision = create :decision
       leader = create(:leader, :with_many_circles)
