@@ -51,16 +51,16 @@ FactoryBot.define do
     trait :with_decisions do
 
       # Add transient atttributes (data which aren't attributes on the model)
-      transient do
-        decisions_count { 5 }
-      end
-      decisions { create_list :decision, decisions_count }
+      # transient do
+      #   decisions_count { 5 }
+      # end
+      decisions { create_list :decision, 5 }
     end
   end
 
   factory :role do
     role_type { "ol" }
     circle
-    association :user, factory: :leader
+    association :user, factory: :leader_with_circles
   end
 end

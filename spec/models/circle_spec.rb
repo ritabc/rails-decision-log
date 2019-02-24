@@ -8,9 +8,9 @@ describe Circle do
   it { should validate_presence_of :description }
   it { should validate_presence_of :abbreviation }
 
-  it 'has associated decisions' do
-    circle_with_decisions = create :circle_with_decisions, decisions_count: 2
-    expect(circle_with_decisions.decisions.count).to eq 2
+  it 'has associated when specified' do
+    circle_with_decisions = create :circle, :with_decisions
+    expect(circle_with_decisions.decisions.count).to eq 5
   end
 
   # it 'will test the three_most_recent scope using FactoryBot' do
