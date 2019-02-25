@@ -1,4 +1,6 @@
 module FormHelper
+
+  # This method should display ensure that each user has the exact number of roles as there are circles
   def setup_user(user)
     user_circles = []
     user.roles.each { |role| user_circles.push(role.circle) }
