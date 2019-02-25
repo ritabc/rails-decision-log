@@ -13,7 +13,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    binding.pry
 
 
 
@@ -48,7 +47,6 @@ class UsersController < ApplicationController
       flash[:notice] = "User successfully updated!"
       redirect_to users_path
     else
-      binding.pry
       flash[:alert] = "Please try again - user was not updated"
       redirect_to edit_user_path
     end
