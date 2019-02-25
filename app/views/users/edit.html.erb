@@ -1,8 +1,8 @@
 <div class="container">
   <h1>Edit User</h1>
 
-  <%= form_for(setup_user(@user)) do |f| %>
-    <%= render partial: "/users/form", locals: {f: f} %>
+  <%= form_for(@user) do |f| %>
+    <%= render partial: "/users/form", locals: {f: f, new_form: false} %>
     <%= submit_tag("Edit", class: "btn btn-primary") %>
   <% end %>
 </div>

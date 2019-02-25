@@ -14,8 +14,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-
-
     # Assign roles, if any
     # circles = Circle.all
     # roles = []
@@ -28,9 +26,11 @@ class UsersController < ApplicationController
     # end
     # push roles into @user.roles
     if @user.save
+      binding.pry
       flash[:notice] = "User successfully added!"
       redirect_to users_path
     else
+      binding.pry
       flash[:alert] = "Please try again - no user was added"
       redirect_to new_user_path
     end
@@ -42,11 +42,14 @@ class UsersController < ApplicationController
   end
 
   def update
+    binding.pry
     @user = User.find(params[:id])
     if @user.update(user_params)
+      binding.pry
       flash[:notice] = "User successfully updated!"
       redirect_to users_path
     else
+      binding.pry
       flash[:alert] = "Please try again - user was not updated"
       redirect_to edit_user_path
     end
@@ -59,7 +62,8 @@ private
     # Circle.all.each do |circle|
     #   circles_hash["#{circle.abbreviation}"]
     # end
-    params.require(:user).permit(:first_name, :last_initial, :password, :email, :site_admin_type, :roles_attributes => [{:id => [:role_type, :circle_id, :role_id]}])
+    params.require(:user).permit(:first_name, :last_initial, :password, :email, :site_admin_type, :roles_attributes => [:role_type, :circle_id, :id])
+    # params.require(:user).permit(:first_name, :last_initial, :password, :email, :site_admin_type)
   end
 
   def current_resource

@@ -31,14 +31,16 @@
     </div>
   </div>
 
-
-  <div class="col-md-5">
-    <p>Circles user is involved in</p>
-    <%= f.fields_for :roles do |ff| %>
-      <% role_type_options = [["Operational Leader", "ol"], ["Elected Representative", "er"], ["Administrator", "admin"], ["None", "none"]] %>
-      <%= ff.select :role_type, role_type_options %>
-      <%= ff.select :circle_id, @circles.map { |c| [c.name, c.id] } %>
-    <% end %>
-  </div>
+  <% unless new_form %>
+    <div class="col-md-5">
+      <p>Circles user is involved in</p>
+      <%= f.fields_for :roles do |ff| %>
+        <p><%= ff.object.circle.name %></p>
+        <% role_type_options = [["Operational Leader", "ol"], ["Elected Representative", "er"], ["Administrator", "admin"], ["None", "none"]] %>
+        <%= ff.select :role_type, role_type_options %>
+        <%= ff.hidden_field :circle_id %>
+      <% end %>
+    </div>
+  <% end %>
 
 </div>
