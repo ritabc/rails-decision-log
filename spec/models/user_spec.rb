@@ -7,6 +7,14 @@ describe User do
   it { should validate_uniqueness_of(:email).case_insensitive }
   it { should validate_confirmation_of :password }
 
+  context 'factorybot' do
+    it 'creates a valid leader (circle-less) from factory' do
+      leader = create :leader
+      expect(leader).to be_valid
+      expect(leader.roles).to eq []
+    end
+  end
+
   let(:leader_with_circles) do
     circles = create_list :circle, 4
     leader = create :leader

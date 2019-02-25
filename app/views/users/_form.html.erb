@@ -34,20 +34,13 @@
 
   <div class="col-md-5">
     <p>Circles user is involved in</p>
-    <% @circles.each do |circle| %>
-      <p><%= circle.name %></p>
-      <%= radio_button_tag circle.abbreviation, "ol", false, id: "#{circle.abbreviation}-ol" %>
-      <%= label_tag circle.abbreviation, "Operational Leader", for: "#{circle.abbreviation}-ol" %>
-
-      <%= radio_button_tag circle.abbreviation, "er", false, id: "#{circle.abbreviation}-er" %>
-      <%= label_tag circle.abbreviation, "Elected Representative", for: "#{circle.abbreviation}-er" %>
-
-      <%= radio_button_tag circle.abbreviation, "admin", false, id: "#{circle.abbreviation}-admin" %>
-      <%= label_tag circle.abbreviation, "Administrator", for: "#{circle.abbreviation}-admin" %>
-
-      <%= radio_button_tag circle.abbreviation, "none", true, id: "#{circle.abbreviation}-none" %>
-      <%= label_tag circle.abbreviation, "None", for: "#{circle.abbreviation}-none" %>
-    <% end %>
+    <%# <% @user.roles.each do |role| %> %>
+      <%= f.fields_for :roles do |ff| %>
+        <% role_type_options = [["Operational Leader", "ol"], ["Elected Representative", "er"], ["Administrator", "admin"], ["None", "none"]] %>
+        <%= ff.select :role_type, role_type_options %>
+        <%= ff.select :circle_id, @circles.map { |c| [c.name, c.id] } %>
+      <% end %>
+    <%# <% end %> %>
   </div>
 
 </div>

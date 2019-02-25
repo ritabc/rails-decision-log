@@ -6,4 +6,10 @@ describe Role do
   it { should validate_presence_of :role_type }
   it { should validate_presence_of :circle }
   it { should validate_presence_of :user }
+
+  context 'factorybot' do
+    it 'create a role from factory' do
+      expect(create :role).to be_valid
+    end
+  end
 end

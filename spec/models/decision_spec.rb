@@ -7,6 +7,14 @@ describe Decision do
   it { should validate_presence_of :date_decided }
   it { should validate_presence_of :circle }
 
+  context 'factorybot' do
+    it 'creates a decision belonging to a circle' do
+      decision = build :decision
+      expect(decision.circle.name).to eq("Land Stewardship")
+    end
+  end
+
+
 
   # Needs editing or removing in favor of permissions_spec
   context 'being interacted with by user', type: :request do

@@ -2,6 +2,12 @@
 #   load seed
 # end
 
+# Needs creating in this order:
+# 1. Circle
+# 2. Decision
+# 3. User
+# 4. Roles
+
 Circle.destroy_all
 Decision.destroy_all
 

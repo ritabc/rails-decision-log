@@ -18,10 +18,12 @@
           <td><%= circle.name %></td>
           <td>
             <% circle.roles.each do |role| %>
-              <span><%= role.role_type %>: </span>
-              <span><%= role.user.first_name %> </span>
-              <span><%= role.user.last_initial %></span>
-              <br>
+              <% unless role.user.nil? %>
+                <span><%= role.role_type %>: </span>
+                <span><%= role.user.first_name %> </span>
+                <span><%= role.user.last_initial %></span>
+                <br>
+              <% end %>
             <% end %>
           </td>
           <td><%= circle.description %></td>
