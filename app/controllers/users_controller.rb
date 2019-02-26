@@ -12,25 +12,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-
-    # Assign roles, if any
-    # circles = Circle.all
-    # roles = []
-    # circles.each do |circle|
-    #   role_type = params["#{circle.abbreviation}"]
-    #   unless role_type == "none"
-    #     role = Role.create(role_type: role_type, user: @user, circle: circle)
-    #     # roles.push(role)
-    #   end
-    # end
-    # push roles into @user.roles
+    @user = User.new(regular_user_params)
     if @user.save
-      binding.pry
       flash[:notice] = "User successfully added!"
       redirect_to users_path
     else
-      binding.pry
       flash[:alert] = "Please try again - no user was added"
       redirect_to new_user_path
     end
@@ -39,17 +25,24 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
     @circles = Circle.all
+    @roles = Role.where(user_id: @user.id)
   end
 
   def update
-    binding.pry
     @user = User.find(params[:id])
-    if @user.update(user_params)
-      binding.pry
+    bool_array =[]
+    bool_array.push(@user.update(regular_user_params))
+    user_roles_params["roles_attributes"].each do |param|
+      role_id = param[1]["id"].to_i
+      circle_id = param[1]["circle_id"].to_i
+      role_type = param[1]["role_type"]
+      bool = Role.find(role_id).update(circle_id: circle_id, role_type: role_type)
+      bool_array.push(bool)
+    end
+    unless bool_array.include?(false)
       flash[:notice] = "User successfully updated!"
       redirect_to users_path
     else
-      binding.pry
       flash[:alert] = "Please try again - user was not updated"
       redirect_to edit_user_path
     end
@@ -57,13 +50,12 @@ class UsersController < ApplicationController
 
 private
 
-  def user_params
-    # circles_hash = {}
-    # Circle.all.each do |circle|
-    #   circles_hash["#{circle.abbreviation}"]
-    # end
-    params.require(:user).permit(:first_name, :last_initial, :password, :email, :site_admin_type, :roles_attributes => [:role_type, :circle_id, :id])
-    # params.require(:user).permit(:first_name, :last_initial, :password, :email, :site_admin_type)
+  def regular_user_params
+    params.require(:user).permit(:first_name, :last_initial, :password, :email, :site_admin_type)
+  end
+
+  def user_roles_params
+    params.require(:user).permit(:roles_attributes => [:id, :role_type, :circle_id, :id])
   end
 
   def current_resource

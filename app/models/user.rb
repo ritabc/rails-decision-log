@@ -5,18 +5,22 @@ class User < ApplicationRecord
   has_secure_password
   accepts_nested_attributes_for :roles
   validates_with UserHasOneRolePerCircle
+  after_create :assign_roles
 
-  after_save do |user|
+
+private
+
+  def assign_roles
     # If leader, iterate over circles and create new role, role_type: none
-    if user.site_admin_type == "leader"
+    if site_admin_type == "leader"
       Circle.all.each do |circle|
-        Role.create(role_type: "none", circle: circle, user: user)
+        Role.create(role_type: "none", circle: circle, user: self)
       end
 
     # If super, iterate over circles, create new role, role_type: admin
-    elsif user.site_admin_type == "super"
+    elsif site_admin_type == "super"
       Circle.all.each do |circle|
-        Role.create(role_type: "admin", circle: circle, user: user)
+        Role.create(role_type: "admin", circle: circle, user: self)
       end
     end
   end
