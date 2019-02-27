@@ -40,7 +40,7 @@ gem 'moment_timezone-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jquery-rails'
-gem 'bootstrap', '~> 4.3'
+gem 'bootstrap', '>= 4.3.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'popper_js', '~> 1.14.3'
