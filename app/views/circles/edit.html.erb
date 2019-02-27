@@ -1,0 +1,8 @@
+<div class="container">
+  <h1>Edit Circle</h1>
+  <%= form_for @circle do |f| %>
+    <%= render partial: "/circles/form", locals: {f: f} %>
+    <%= submit_tag("Save", class: "btn btn-primary") %>
+  <% end %>
+
+</div>

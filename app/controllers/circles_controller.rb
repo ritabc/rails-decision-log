@@ -4,6 +4,7 @@ class CirclesController < ApplicationController
   end
 
   def new
+    @circle = Circle.new
   end
 
   def edit

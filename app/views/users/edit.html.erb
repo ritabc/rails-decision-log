@@ -4,6 +4,6 @@
   <%= form_for @user do |f| %>
     <% editing_self = @user == current_user ? true : false %>
     <%= render partial: "/users/form", locals: {f: f, new_form: false, editing_self: editing_self } %>
-    <%= submit_tag("Edit", class: "btn btn-primary") %>
+    <%= submit_tag("Save", class: "btn btn-primary") %>
   <% end %>
 </div>

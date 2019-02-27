@@ -27,10 +27,16 @@
             <% end %>
           </td>
           <td><%= circle.description %></td>
-          <td><%= link_to circle.abbreviation + " Decisions", "#", { class: "btn btn-primary" } %></td>
+          <td><%= link_to "View", "#", { class: "btn btn-primary" } %></td>
           <td><%= link_to "Edit", edit_circle_path(circle), { class: "btn btn-info" } %></td>
         </tr>
       <% end %>
+      <tr>
+        <td colspan="3">
+        <%= link_to "Add New Circle", new_circle_path, { class: "btn btn-success"} %>
+        </td>
+
+      </tr>
     </tbody>
   </table>
 

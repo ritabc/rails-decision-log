@@ -2,18 +2,18 @@
 <div class="form-row">
   <div class="form-group col-md-5">
     <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control mb-2 mr-sm-2" %>
+    <%= f.text_field :name, required: true, class: "form-control mb-2 mr-sm-2" %>
   </div>
 
   <div class="form-group col-md-4">
     <%= f.label :circle_id, "Deciding Circle" %>
-    <%= f.select :circle_id, @circles.map { |circle| [circle.name, circle.id] }, {}, { class: "form-control mb-2 mr-sm-2" } %>
+    <%= f.select :circle_id, @circles.map { |circle| [circle.name, circle.id] }, {required: true}, { class: "form-control mb-2 mr-sm-2" } %>
   </div>
 
   <div class="form-group col-md-3">
     <%= f.label :date_decided, "Date Decided (Required)" %>
     <div class="input-group">
-      <%= f.date_field :date_decided, class: "form-control mb-2 mr-sm-2" %>
+      <%= f.date_field :date_decided, required: true, class: "form-control mb-2 mr-sm-2" %>
     </div>
   </div>
 </div>
@@ -22,7 +22,7 @@
 
   <div class="form-group col-md-9">
     <%= f.label :description %>
-    <%= f.text_area :description, { class: "form-control", size: "100x5" } %>
+    <%= f.text_area :description, {required: true, class: "form-control", size: "100x5" } %>
     <small class="form-text text-muted">Viewable by all visitors to this site</small>
   </div>
 
