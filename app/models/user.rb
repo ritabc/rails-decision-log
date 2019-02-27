@@ -1,12 +1,11 @@
 class User < ApplicationRecord
-  has_many :roles, dependent: :destroy #, inverse_of: :user
-  has_many :circles, through: :roles
+  has_many :roles
+  has_many :circles, through: :roles, dependent: :destroy
   validates :email, :presence => true, :uniqueness => { case_sensitive: false }
   has_secure_password
   accepts_nested_attributes_for :roles
   validates_with UserHasOneRolePerCircle
   after_create :assign_roles
-
 
 private
 

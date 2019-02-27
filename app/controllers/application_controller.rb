@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   include UserHelper
-  include FormHelper
   protect_from_forgery with: :exception
   helper_method :current_user, :currently_super_admin?
   before_action :authorize
