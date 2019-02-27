@@ -3,17 +3,12 @@
 #### https://hmev-decision-log.herokuapp.com/
 
 ## Completed Features
-* Home page of Unincorporated Decisions (usually newer ones that are still pending review)
-* A list of all decisions
-* Decisions conducted by each circle
-* Individual decisions page, including in some cases external links to Supporting Documents (Proposals for Change or Meeting Minutes)
-* Login / Logout functionality for Leaders and Supers (admin types)
-* Can only Add a Decision or view the New Decision Form if logged in as an leader or super
-* Sortable columns on All Decisions page (with help from Ryan Bates' RailsCast #288)
-  - Decision name
-  - Deciding Circle
-  - Date Decided
+* Home page of All Decisions, Sortable by Name, Circle, Date Decided
+* Full-text search of Decisions using pg_search gem
+* From scratch Authorization
 * Use of BCrypt gem for Authentication
+* Use of partials to DRY new & edit forms for decisions, circles, and users
+*
 
 ## Screenshot of New Decision Page
 #### As viewable by Leader and Super (Admin-Type) Users
@@ -24,9 +19,10 @@
 * Public 'viewer.' Anyone, without logging in, can see:
   - all decisions; individually or sorted by name, circle, or date decided, or filtered by circle or whether it has a review by date
 * Login required for 'leader.' Above, plus can:
-  - Add circles
-  - Edit circles (name/description/OL's/ER's)
-  - Add leader
+  - Add new circle
+  - Update circles (For Now: any edit functionality, ideally: only name/description)
+  - Delete circles (iff circle has no decisions)
+  - Add leader (This may not be best place for authorization - may need to just add functionality in view?)
   - Edit self (leader or Super)
   - Delete self (leader or super)
   - Add/edit/delete own circle's decision
@@ -34,17 +30,18 @@
   - Edit leaders:
     - Delete
     - Graduate leader to Super
-    - Degraduate Super to leader
-  - Edit other Supers, and delete other supers
+    - Degraduate Super to Leader
+    - assign leaders/supers to circles
+  - Edit other Supers
   - Add/edit/delete any decision
+  - Delete Super
 
 ## Goals for the Application
 * Continue to work with Hart's Mill Eco-Village to design this product with their needs in mind
 * Beautify and advance the site's style
 * 'Forgot Password' feature for Leaders and Supers
 * Add password length validation and corresponding error message : if the user tries to sign up with a short password, there is an appropriate error message
-* Use the Devise gem for Authorization
-* Add integration tests
+* Improve test coverage integration tests
 * Have HM be a group - other organizations could use this tool as well
 * 'Request Invite' feature: Since edits to these decisions are done by Hart's Mill Members only, a form where a viewer can request to be added as an leaders should be available. This would send an email the supers
 
@@ -66,7 +63,13 @@
 * Rails v. 5.2.1
 * Uses PostgreSQL as the Active Record Database
 * Deployed using Heroku
-* Lightly styled with Bootstrap 4.0.0
+* Lightly styled with Bootstrap 4
 * This application is licensed under the MIT license.
 
 If you'd like to learn about the Hart's Mill Eco-Village community/project, see the [website](http://www.hartsmill.org/) for more details.
+
+With help from following RailsCast episodes:
+  - #228 Sortable Table Columns
+  - #37 Simple Search Form
+  - #343 Full-Text Search in PostgreSQL
+  - #385, #386 Authorization from Scratch Parts 1 & 2
