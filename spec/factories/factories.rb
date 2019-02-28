@@ -7,10 +7,11 @@ FactoryBot.define do
 
   ## Layout / Summary / Build Order:
   # NOTE: Keep this file simple, okay to repeat logic (ie. associating circles with users) in spec files
+  ## Note: this file does NOT associate roles with leaders or circles. SPec files will need to do that individually. (B/c the after_create User callback isn't being run by FB)
   # 1. Circle, which can exist by itself
   # 2. Decision, which must belong to a circle
-  # 3. User, created without circles/roles
-  # 4. Role, when created needs Circle and User
+  # 3. User, who when created will make:
+  # 4. Role (by default, type will be:c none or admin) for every circle
 
   ## Factory for Circle
   ## Factor without decisions
@@ -38,7 +39,7 @@ FactoryBot.define do
     circle
   end
 
-  ## Factory for User type: 'leader'
+  ## Factory for User type: 'leader' Default leader will be None role_type for each circle
   factory :leader, class: User do
     email { generate(:email) }
     first_name { "Rita" }
@@ -63,19 +64,21 @@ FactoryBot.define do
     ## (May not be proper way to create super - will super inherit email/password attributes from leader?)
     factory :super do
       site_admin_type { "super" }
+
+      # after :buil do |user|
+      #   Circle.all.each do |circle|
+      #     Role.create(role_type: "admin", circle: circle, user: user)
+      #   end
+      # end
     end
   end
 
-  # factory :role do
-  #   role_type { "ol" }
-  #   circle
-  #   association :user, factory: :leader_with_circles
-  # end
 
   factory :role do
     role_type { "ol" }
     circle { create :circle }
     user { create :leader }
+    #   association :user, factory: :leader_with_circles
   end
 
 end

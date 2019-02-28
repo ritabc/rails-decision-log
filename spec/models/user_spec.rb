@@ -7,36 +7,37 @@ describe User do
   it { should validate_uniqueness_of(:email).case_insensitive }
   it { should validate_confirmation_of :password }
 
-  context 'factorybot' do
-    it 'creates a valid leader (circle-less) from factory' do
-      leader = create :leader
-      expect(leader).to be_valid
-      expect(leader.roles).to eq []
+  context 'users' do
+    before(:each) do
+      Circle.destroy_all
+      User.destroy_all
+      Role.destroy_all
+      @circles = create_list :circle, 4
+      @leader = create :leader
+    end
+
+    it 'leader is associated with all circles as none role_type' do
+      Circle.all.each do |c|
+        role = create(:role, role_type: "none", circle: c, user: @leader)
+        @leader.roles.push(role)
+      end
+      expect(@leader.roles.pluck(:role_type)).to eq %w(none none none none)
+    end
+
+    it 'creates a valid leader (with a role for each circle) from factory' do
+      expect(@leader.roles.count).to eq(Circle.all.count)
+    end
+
+    it 'tests authentication' do
+      expect(User.find_by(email: @leader.email).try(:authenticate, @leader.password)).to eq(@leader)
+    end
+
+    it 'has many roles' do
+      expect(@leader.roles.count).to eq 4
+    end
+
+    it 'can belong to many circles' do
+      expect(@leader.circles.count).to eq 4
     end
   end
-
-  let(:leader_with_circles) do
-    circles = create_list :circle, 4
-    leader = create :leader
-    circles.each { |circle| create :role, user: leader, circle: circle }
-    leader
-  end
-
-  it 'tests authentication' do
-    expect(User.find_by(email: leader_with_circles.email).try(:authenticate, leader_with_circles.password)).to eq(leader_with_circles)
-  end
-
-  it 'has many roles' do
-    expect(leader_with_circles.roles.count).to eq 4
-  end
-
-  it 'can belong to many circles' do
-    expect(leader_with_circles.circles.count).to eq 4
-  end
-
-  it 'creates a leader not belonging to a certain circle' do
-    leaderless_circle = create :circle, name: "Leaderless Circle"
-    expect(leader_with_circles.circles.include?(leaderless_circle)).to eq false
-  end
-
 end
