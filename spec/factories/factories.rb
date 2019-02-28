@@ -2,6 +2,7 @@
 FactoryBot.define do
 
   sequence :email do |n|
+    nn = n * rand(30)
     "rita#{n}@test.com"
   end
 

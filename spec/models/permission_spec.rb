@@ -42,8 +42,7 @@ describe Permission do
   context 'User logged in as leader' do
 
     context 'without circles associated with them' do
-
-      subject { Permission.new(create(:leader)) }
+      subject { Permission.new(create :leader, email: "rita#{rand(10)}@email.com") }
 
       it { should allow(:decisions, :index) }
 
@@ -70,18 +69,30 @@ describe Permission do
     context "either associated or not with circle of decision attempting to add" do
 
       before(:all) do
+        Circle.destroy_all
+        Role.destroy_all
         @non_associated_decision = create(:decision)
+        # @associated_circle = create :circle
         @associated_decision = create(:decision)
       end
 
+      # # let Gets hit every time called
+      # let(:non_associated_decision) { create :decision }
+      # let(:associated_circle) { create :circle }
+      # let(:associated_decision) { create :decision, circle: associated_circle }
+
+      # Gets hit during every test
       subject do
-        circle = create :circle
-        circle.decisions.push(@associated_decision) # @assoc_dec now belongs to circle
-        leader = create :leader
-        create(:role, circle: circle, user: leader) # circle and leader now assoc.
+        leader = create :leader, email: "rita#{rand(10)}@email.com"
+        # binding.pry
+        # Make up for User#assign_roles not being called in FB
+        Role.destroy_all
+        role = create(:role, circle: @associated_decision.circle, user: leader) # circle and leader now assoc.
+        leader.roles.push(role) # circle and leader now assoc.
+        # binding.pry # but is associated's circle also linked to user? IT SHOULD BE
         Permission.new(leader)
       end
-
+      #
       it { should allow(:decisions, :index) }
       it { should allow(:decisions, :new, @associated_decision) }
       it { should allow(:decisions, :create, @associated_decision) }
@@ -129,7 +140,7 @@ describe Permission do
 
   context 'User as super' do
 
-    subject { Permission.new(create(:super)) }
+    subject { Permission.new(create :super, email: "rita#{rand(20)}@email.com") }
 
     it { should allow(:any, :all) }
   end
