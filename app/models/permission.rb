@@ -10,8 +10,11 @@ class Permission
       allow_all if super?(user)
       allow [:decisions, :circles], [:new, :create]
       allow :decisions, [:edit, :update, :destroy] do |decision|
-        # binding.pry
         decision.circle.in?(user.circles)
+      end
+      allow :circles, [:edit, :update]
+      allow :circles, :destroy do |circle|
+        circle.decisions.count == 0
       end
     end
   end

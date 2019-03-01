@@ -42,6 +42,10 @@ describe Permission do
   context 'User logged in as leader' do
 
     context 'without circles associated with them' do
+
+      let(:circle) { create :circle }
+      let(:circle_with_decisions ) { create :circle, :with_decisions }
+
       subject { Permission.new(create :leader, email: "rita#{rand(10)}@email.com") }
 
       it { should allow(:decisions, :index) }
@@ -49,10 +53,11 @@ describe Permission do
       it { should allow(:circles, :index) }
       it { should allow(:circles, :new) }
       it { should allow(:circles, :create) }
-      # it { should allow("circles", "edit") } # For now, ulitmately editing at this level will be restricted to name and description (not associating users)
-      # it { should allow("circles", "update") }
-      # it { should allow("circles", "destroy") }
-      #
+      it { should allow(:circles, :edit) }
+      it { should allow(:circles, :update) }
+      it { should allow(:circles, :destroy, circle) }
+      it { should_not allow(:circles, :destroy, circle_with_decisions) }
+    
       # it { should allow("users", "new") } # These 2: Can only add the type of themself of lower (leader < super)
       # it { should allow("users", "create") }
       # it { should_not allow("users", "edit") } # These 3: Ideally, allow iff editing self
@@ -76,20 +81,13 @@ describe Permission do
         @associated_decision = create(:decision)
       end
 
-      # # let Gets hit every time called
-      # let(:non_associated_decision) { create :decision }
-      # let(:associated_circle) { create :circle }
-      # let(:associated_decision) { create :decision, circle: associated_circle }
-
       # Gets hit during every test
       subject do
         leader = create :leader, email: "rita#{rand(10)}@email.com"
-        # binding.pry
-        # Make up for User#assign_roles not being called in FB
         Role.destroy_all
+        # Make up for User#assign_roles not being called in FB
         role = create(:role, circle: @associated_decision.circle, user: leader) # circle and leader now assoc.
         leader.roles.push(role) # circle and leader now assoc.
-        # binding.pry # but is associated's circle also linked to user? IT SHOULD BE
         Permission.new(leader)
       end
       #
