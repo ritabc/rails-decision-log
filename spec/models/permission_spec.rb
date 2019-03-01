@@ -57,18 +57,27 @@ describe Permission do
       it { should allow(:circles, :update) }
       it { should allow(:circles, :destroy, circle) }
       it { should_not allow(:circles, :destroy, circle_with_decisions) }
-    
-      # it { should allow("users", "new") } # These 2: Can only add the type of themself of lower (leader < super)
-      # it { should allow("users", "create") }
-      # it { should_not allow("users", "edit") } # These 3: Ideally, allow iff editing self
-      # it { should_not allow("users", "update") }
-      # it { should_not allow("users", "destroy") }
 
       it 'should check sessions' do
         should allow(:sessions, :new)
         should allow(:sessions, :create)
         should allow(:sessions, :destroy)
       end
+    end
+
+    context 'users controller' do
+      let(:themself) { create :leader, email: "rita#{rand(10)}@email.com" }
+      let(:another) { create :leader, email: "rbc#{rand(10)}@email.com" }
+      subject { Permission.new(themself)}
+      # it { should allow("users", "new") } # These 2: Can only add the type of themself of lower (leader < super)
+      # it { should allow("users", "create") }
+      it { should allow(:users, :edit, themself) }
+      it { should allow(:users, :update, themself) }
+      it { should allow(:users, :destroy, themself) }
+      it { should_not allow(:users, :edit, another) }
+      it { should_not allow(:users, :update, another) }
+      it { should_not allow(:users, :destroy, another) }
+
     end
 
     context "either associated or not with circle of decision attempting to add" do

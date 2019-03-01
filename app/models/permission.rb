@@ -16,6 +16,9 @@ class Permission
       allow :circles, :destroy do |circle|
         circle.decisions.count == 0
       end
+      allow :users, [:edit, :update, :destroy] do |user_record|
+        user_record == user
+      end
     end
   end
 
