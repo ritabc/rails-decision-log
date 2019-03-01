@@ -7,6 +7,17 @@ class CirclesController < ApplicationController
     @circle = Circle.new
   end
 
+  def create
+    @circle = Circle.new(circle_params)
+    if @circle.save
+      flash[:notice] = "Circle successfully added!"
+      redirect_to circles_path
+    else
+      flash[:alert] = "Please try again - no circle was added."
+      redirect_to new_circle_path
+    end
+  end
+
   def edit
     @circle = Circle.find(params[:id])
   end
@@ -24,7 +35,7 @@ class CirclesController < ApplicationController
 
 private
 
-  def cirlce_params
+  def circle_params
     params.require(:circle).permit(:name, :description, :abbreviation)
   end
 

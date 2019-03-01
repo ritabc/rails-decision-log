@@ -85,18 +85,20 @@ describe Permission do
       before(:all) do
         Circle.destroy_all
         Role.destroy_all
-        @non_associated_decision = create(:decision)
-        # @associated_circle = create :circle
-        @associated_decision = create(:decision)
+        @non_associated_circle = create(:circle)
+        @non_associated_decision = create(:decision, circle: @non_associated_circle)
+        @associated_circle = create :circle
+        @associated_decision = create(:decision, circle: @associated_circle)
       end
 
       # Gets hit during every test
       subject do
-        leader = create :leader, email: "rita#{rand(10)}@email.com"
-        Role.destroy_all
-        # Make up for User#assign_roles not being called in FB
-        role = create(:role, circle: @associated_decision.circle, user: leader) # circle and leader now assoc.
-        leader.roles.push(role) # circle and leader now assoc.
+        leader = User.create(email: "rita1@email.com", password: "pass123", password_confirmation: "pass123", site_admin_type: "leader")
+        # binding.pry # Should have 2 roles (b.c there's 2 circles), both are None type
+        # Give access to leader for associated_circle
+        associated_role = Role.find_by(user: leader, circle: @associated_circle)
+        associated_role.role_type = "admin"
+        associated_role.save
         Permission.new(leader)
       end
       #

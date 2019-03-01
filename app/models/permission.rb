@@ -10,7 +10,14 @@ class Permission
       allow_all if super?(user)
       allow [:decisions, :circles], [:new, :create]
       allow :decisions, [:edit, :update, :destroy] do |decision|
-        decision.circle.in?(user.circles)
+        circles_user_involved_in = []
+        Circle.all.each do |circle|
+          role = Role.find_by(circle: circle, user: user)
+          unless role.role_type == "none"
+            circles_user_involved_in.push(circle)
+          end
+        end
+        decision.circle.in?(circles_user_involved_in)
       end
       allow :circles, [:edit, :update]
       allow :circles, :destroy do |circle|
