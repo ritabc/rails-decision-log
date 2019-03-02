@@ -1,5 +1,5 @@
 class Permission
-  include UserHelper
+  include MiscHelper
 
   # Method which happens upon creation of Permission.
   # Uses DSL to state which lists of controllers and actions are allowed
@@ -21,7 +21,7 @@ class Permission
       end
       allow :circles, [:edit, :update]
       allow :circles, :destroy do |circle|
-        circle.decisions.count == 0
+        circle_has_no_decisions?(circle)
       end
       allow :users, [:edit, :update, :destroy] do |user_record|
         user_record == user
@@ -54,19 +54,4 @@ class Permission
   def allow_all
     @allow_all = true
   end
-
-private
-
-  # def super?(user)
-  #   user.site_admin_type == 'super'
-  # end
-
 end
-
-# def circle_contains_decisions?
-#   @circle.decisions.count > 0
-# end
-
-# def leader?
-#   site_admin_type == 'leader'
-# end

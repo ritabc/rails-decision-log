@@ -19,13 +19,13 @@ class CirclesController < ApplicationController
   end
 
   def edit
-    @circle = Circle.find(params[:id])
+    @circle = current_resource
   end
 
   def update ## TODO: Also need to be able to update roles
-    @circle = User.find(params[:id])
+    @circle = current_resource
     if @circle.update(circle_params)
-      flash[:notice] = "User successfully updated!"
+      flash[:notice] = "Circle successfully updated!"
       redirect_to '/'
     else
       flash[:alert] = "Please try again - circle was not updated"
@@ -33,10 +33,20 @@ class CirclesController < ApplicationController
     end
   end
 
+  def destroy
+    @circle = current_resource
+    @circle.destroy
+    redirect_to circles_path
+  end
+
 private
 
   def circle_params
     params.require(:circle).permit(:name, :description, :abbreviation)
+  end
+
+  def current_resource
+    @current_resource ||= Circle.find(params[:id]) if params[:id]
   end
 
 end

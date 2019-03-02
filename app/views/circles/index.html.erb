@@ -1,4 +1,4 @@
-<%= render "/layouts/sort_search_nav", locals: {title: "Hart's Mill Decisions by Circles", sort_available?: false} %>
+<%= render "/layouts/sort_search_nav", locals: {title: "Hart's Mill Circles", sort_available?: false} %>
 <div class="container">
   <table class="table">
     <thead>
@@ -8,7 +8,10 @@
         <th scope="col">OLs/ERs/Admins</th>
         <th scope="col">Description</th>
         <th scope="col">Decisions</th>
-        <th scope="col">Edit</th>
+        <% if allow? :circles, :edit %>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        <% end %>
       </tr>
     </thead>
     <tbody>
@@ -28,7 +31,10 @@
           </td>
           <td><%= circle.description %></td>
           <td><%= link_to "View", "#", { class: "btn btn-primary" } %></td>
-          <td><%= link_to "Edit", edit_circle_path(circle), { class: "btn btn-info" } %></td>
+          <% if allow? :circles, :edit %>
+            <td><%= link_to "Edit", edit_circle_path(circle), { class: "btn btn-info" } %></td>
+            <td><%= link_to "Delete", circle_path(circle), { :data => { confirm: "You sure?", method: "delete" }, class: "btn btn-danger" } %></td>
+          <% end %>
         </tr>
       <% end %>
       <tr>
