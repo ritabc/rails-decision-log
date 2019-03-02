@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :decisions, except: :show
 
-  resources :users, except: :show
+  resources :users
 
   get '/signin' => 'sessions#new'
   post '/signin' => 'sessions#create'

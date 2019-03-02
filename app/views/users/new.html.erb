@@ -2,8 +2,8 @@
   <h1>Add User</h1>
 
   <%= form_for @user do |f| %>
-    <% editing_self = @user == current_user ? true : false %>
-    <%= render partial: "/users/form", locals: {f: f, new_form: true, editing_self: editing_self } %>
+    <% editing_self = @user == current_user %>
+    <%= render partial: "/users/form", locals: {f: f, allow_roles_assign: false, editing_self: editing_self } %>
     <%= submit_tag("Add", class: "btn btn-primary") %>
   <% end %>
 </div>

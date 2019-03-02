@@ -1,9 +1,9 @@
 <div class="container">
-  <h1>Edit User</h1>
+  <h1>Edit Profile</h1>
 
   <%= form_for @user do |f| %>
     <% editing_self = @user == current_user %>
-    <%= render partial: "/users/form", locals: {f: f, allow_roles_assign: true, editing_self: editing_self } %>
+    <%= render partial: "/users/form", locals: {f: f, allow_roles_assign: super?(@user), editing_self: editing_self } %>
     <%= submit_tag("Save", class: "btn btn-primary") %>
   <% end %>
 </div>

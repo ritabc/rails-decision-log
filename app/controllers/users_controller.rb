@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def show
+    @user = current_resource
+  end
+
   def new
     @user = User.new
     @circles = Circle.all
@@ -23,13 +27,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_resource
     @circles = Circle.all
     @roles = Role.where(user_id: @user.id)
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_resource
     bool_array =[]
     bool_array.push(@user.update(regular_user_params))
     user_roles_params["roles_attributes"].each do |param|
