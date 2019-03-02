@@ -68,7 +68,7 @@ class Permission
   # The method that is used in Application Controller, Views, and Specs
   def allow? (controller, action, resource = nil)
     allowed = @allow_all || @allowed_actions[[controller.to_s, action.to_s]]
-    allowed && (allowed == true || resource && allowed.call(resource))
+    allowed && (allowed == true || (resource && allowed.call(resource)))
   end
 
 
