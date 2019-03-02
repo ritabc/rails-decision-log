@@ -43,6 +43,9 @@ class Permission
         allow :users, [:edit, :update] do |user_record|
           user_record == user
         end
+        allow :users, :destroy do |user_record|
+          user_record == user
+        end
       end
     end
   end

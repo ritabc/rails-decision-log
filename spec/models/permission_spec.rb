@@ -74,6 +74,8 @@ describe Permission do
       it { should allow(:users, :edit, themself) }
       it { should allow(:users, :update, themself) }
       it { should allow(:users, :destroy, themself) }
+      it { should allow(:users, :show, themself) }
+      it { should_not allow(:users, :show, another) }
       it { should_not allow(:users, :edit, another) }
       it { should_not allow(:users, :update, another) }
       it { should_not allow(:users, :destroy, another) }
@@ -109,7 +111,7 @@ describe Permission do
       it { should allow(:decisions, :update, @associated_decision) }
       it { should allow(:decisions, :destroy, @associated_decision) }
       it { should allow(:decisions, :new, @non_associated_decision) }
-      it { should allow(:decisions, :create, @non_associated_decision) }
+      it { should_not allow(:decisions, :create, @non_associated_decision) }
       it { should_not allow(:decisions, :edit, @non_associated_decision) }
       it { should_not allow(:decisions, :update, @non_associated_decision) }
       it { should_not allow(:decisions, :destroy, @non_associated_decision) }
@@ -122,35 +124,24 @@ describe Permission do
     end
   end
 
-  # context 'leader of Circle not having Decision in Question' do
-  #   let(:specific_decision) { create :decision }
-  #   let(:circle_with_decisions_but_not_specific_decision) { create :circle, :with_decisions }
-  #   let(:leader_of_specific_circle) do
-  #     leader = create(:leader, :with_many_circles)
-  #     leader.circles.push(circle_with_decisions_but_not_specific_decision)
-  #     leader
-  #   end
-  #
-  #   subject { Permission.new(user: leader_of_specific_circle, circle: circle_with_decisions_but_not_specific_decision, decision: specific_decision) }
-  #
-  #   it { should allow("decisions", "index") }
-  #   it { should allow("decisions", "new") }
-  #   it { should_not allow("decisions", "create") }
-  #   it { should_not allow("decisions", "edit") }
-  #   it { should_not allow("decisions", "update") }
-  #   it { should_not allow("decisions", "destroy") }
-  #
-  #   it { should allow("sessions", "new") }
-  #   it { should allow("sessions", "create") }
-  #   it { should allow("sessions", "destroy") }
-  #
-  # end
-
-
   context 'User as super' do
 
-    subject { Permission.new(create :super, email: "rita#{rand(20)}@email.com") }
+    context 'users controller' do
 
-    it { should allow(:any, :all) }
+      let(:themself) { create :super, email: "rita#{rand(10)}@email.com" }
+      let(:another) { create :super, email: "rbc#{rand(10)}@email.com" }
+
+      subject { Permission.new(themself)}
+
+      it { should allow(:users, :edit, themself) }
+      it { should allow(:users, :update, themself) }
+      it { should allow(:users, :destroy, themself) }
+      it { should allow(:users, :show, themself) }
+      it { should allow(:users, :edit, another) }
+      it { should allow(:users, :update, another) }
+      it { should allow(:users, :destroy, another) }
+      it { should_not allow(:users, :show, another) }
+
+    end
   end
 end
