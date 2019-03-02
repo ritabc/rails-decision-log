@@ -14,7 +14,13 @@ class DecisionsController < ApplicationController
     if super?(current_user)
       @circles = Circle.all
     elsif current_user
-      @circles = current_user.circles
+      @circles = []
+      Circle.all.each do |circle|
+        role = Role.find_by(circle: circle, user: current_user)
+        unless role.role_type == "none"
+          @circles.push(circle)
+        end
+      end
     end
     @decision = Decision.new
   end

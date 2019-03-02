@@ -4,27 +4,42 @@ class Permission
   # Method which happens upon creation of Permission.
   # Uses DSL to state which lists of controllers and actions are allowed
   def initialize(user)
+
+    # Anyone
     allow :sessions, [:new, :create, :destroy]
     allow [:decisions, :circles], :index
+
+    # If They're logged in
     if user
-      allow_all if super?(user)
-      allow [:decisions, :circles], [:new, :create]
-      allow :decisions, [:edit, :update, :destroy] do |decision|
-        circles_user_involved_in = []
-        Circle.all.each do |circle|
-          role = Role.find_by(circle: circle, user: user)
-          unless role.role_type == "none"
-            circles_user_involved_in.push(circle)
-          end
-        end
-        decision.circle.in?(circles_user_involved_in)
+      allow :circles, [:new, :create]
+      allow :users, :show do |user_record|
+        user_record == user
       end
-      allow :circles, [:edit, :update]
       allow :circles, :destroy do |circle|
         circle_has_no_decisions?(circle)
       end
-      allow :users, [:edit, :update, :destroy] do |user_record|
-        user_record == user
+
+      # If they're logged in as a super
+      if super?(user)
+        allow :decisions, [:new, :create]
+        allow :users, :index
+        allow [:users, :decisions], [:edit, :update, :destroy]
+        allow :circles, [:edit, :update]
+
+      # If they're logged in as a leader
+      else
+        allow :circles, [:edit, :update]
+        allow :decisions, :new
+        allow :decisions, [:create, :edit, :update, :destroy] do |decision|
+          circles_user_involved_in = []
+          Circle.all.each do |circle|
+            role = Role.find_by(circle: circle, user: user)
+            unless role.role_type == "none"
+              circles_user_involved_in.push(circle)
+            end
+          end
+          decision.circle.in?(circles_user_involved_in)
+        end
       end
     end
   end
