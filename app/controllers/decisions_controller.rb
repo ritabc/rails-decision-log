@@ -2,6 +2,7 @@ class DecisionsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def all
+    @circles = Circle.order(:id)
     if params[:search].present?
       @decisions = Decision.name_description_search(params[:search])
     else
@@ -12,10 +13,10 @@ class DecisionsController < ApplicationController
 
   def new
     if super?(current_user)
-      @circles = Circle.all
+      @circles = Circle.order(:id)
     elsif current_user
       @circles = []
-      Circle.all.each do |circle|
+      Circle.order(:id).each do |circle|
         role = Role.find_by(circle: circle, user: current_user)
         unless role.role_type == "none"
           @circles.push(circle)
@@ -37,7 +38,7 @@ class DecisionsController < ApplicationController
   end
 
   def edit
-    @circles = Circle.all
+    @circles = Circle.order(:id)
     @decision = current_resource
   end
 
@@ -56,6 +57,11 @@ class DecisionsController < ApplicationController
     @decision = current_resource
     @decision.destroy
     redirect_to decisions_path
+  end
+
+  def review
+    @circles = Circle.order(:id)
+    @decisions = Decision.has_and_sort_by_review_by_date
   end
 
 private

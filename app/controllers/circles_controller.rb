@@ -1,6 +1,6 @@
 class CirclesController < ApplicationController
   def index
-    @circles = Circle.all
+    @circles = Circle.order(:id)
   end
 
   def new

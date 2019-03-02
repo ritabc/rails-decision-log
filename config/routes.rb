@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     get '/decisions', to: 'circle_decisions#index'
   end
 
+  get '/review', to: 'decisions#review'
+
   resources :decisions, except: [:show, :index]
 
   resources :users

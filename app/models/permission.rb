@@ -8,7 +8,7 @@ class Permission
     # Anyone
     allow :sessions, [:new, :create, :destroy]
     allow :circles, :index
-    allow :decisions, :all
+    allow :decisions, [:all, :review]
     allow :circle_decisions, :index
 
     # If They're logged in

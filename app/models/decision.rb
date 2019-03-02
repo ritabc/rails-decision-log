@@ -9,11 +9,10 @@ class Decision < ApplicationRecord
   pg_search_scope :custom_search, against: [:name, :description],
       using: {tsearch: {dictionary: "english"}}
 
-  # scope(:three_most_recent, -> (circle) {
-  #   where("circle_id = ?", circle.id)
-  #   .order(date_decided: :desc)
-  #   .limit(3)
-  # })
+  scope(:has_and_sort_by_review_by_date, -> () {
+    where("review_by_date IS NOT NULL")
+    .order(review_by_date: :desc)
+  })
 
   def self.name_description_search(search)
     if search.present?

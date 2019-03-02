@@ -14,9 +14,31 @@
   <% if !params[:search].present? && locals[:sort_available?] %>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item"><%= sortable "name", "Name" %></li>
-        <li class="nav-item"><%= sortable "circle_id", "Circle" %></li>
-        <li class="nav-item"><%= sortable "date_decided", "Date Decided" %></li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle href="#" id="navbarDropdown2" role="button" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">
+            Filter By
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+            <%= link_to "Needing Review", review_path, class: "dropdown-item" %>
+            <% @circles.each do |circle| %>
+              <%= link_to "#{circle.abbreviation}", circle_decisions_path(circle.id), class: "dropdown-item" %>
+            <% end %>
+            <%= link_to "Show All", root_path, class: "dropdown-item" %>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false">
+            Sort By
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+            <%= sortable "name", "Name" %>
+            <%= sortable "circle_id", "Circle" %>
+            <%= sortable "date_decided", "Date Decided" %>
+          </div>
+        </li>
+
       </ul>
     </div>
   <% end %>
