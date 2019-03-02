@@ -36,16 +36,18 @@ class UsersController < ApplicationController
     @user = current_resource
     bool_array =[]
     bool_array.push(@user.update(regular_user_params))
-    user_roles_params["roles_attributes"].each do |param|
-      role_id = param[1]["id"].to_i
-      circle_id = param[1]["circle_id"].to_i
-      role_type = param[1]["role_type"]
-      bool = Role.find(role_id).update(circle_id: circle_id, role_type: role_type)
-      bool_array.push(bool)
+    unless user_roles_params["roles_attributes"].nil?
+      user_roles_params["roles_attributes"].each do |param|
+        role_id = param[1]["id"].to_i
+        circle_id = param[1]["circle_id"].to_i
+        role_type = param[1]["role_type"]
+        bool = Role.find(role_id).update(circle_id: circle_id, role_type: role_type)
+        bool_array.push(bool)
+      end
     end
     unless bool_array.include?(false)
       flash[:notice] = "User successfully updated!"
-      redirect_to users_path
+      redirect_to super?(current_user) ? users_path : root_path 
     else
       flash[:alert] = "Please try again - user was not updated"
       redirect_to edit_user_path

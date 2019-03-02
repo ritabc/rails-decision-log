@@ -40,6 +40,9 @@ class Permission
           end
           decision.circle.in?(circles_user_involved_in)
         end
+        allow :users, [:edit, :update] do |user_record|
+          user_record == user
+        end
       end
     end
   end
