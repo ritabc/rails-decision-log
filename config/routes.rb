@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
 
-  root :to => 'decisions#index'
+  root :to => 'decisions#all'
 
-  resources :circles , except: :show
+  get '/all', to: 'decisions#all'
 
-  resources :decisions, except: :show
+  resources :circles , except: :show do
+    get '/decisions', to: 'circle_decisions#index'
+  end
+
+  resources :decisions, except: [:show, :index]
 
   resources :users
 

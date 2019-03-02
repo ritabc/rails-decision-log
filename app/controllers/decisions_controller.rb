@@ -1,7 +1,7 @@
 class DecisionsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
-  def index
+  def all
     if params[:search].present?
       @decisions = Decision.name_description_search(params[:search])
     else
