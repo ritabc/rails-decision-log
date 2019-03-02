@@ -17,15 +17,14 @@
 ## User Type, User Stories
 #### (Some of this functionality is still in-progress)
 * Public 'viewer.' Anyone, without logging in, can see:
-  - all decisions; individually or sorted by name, circle, or date decided, or filtered by circle or whether it has a review by date
+  - all circles and decisions; Decisions are sorted by name, circle, or date decided, or filtered by circle or whether it has a review by date
 * Login required for 'leader.' Above, plus can:
+  - Add/Edit/delete own circle's decision
   - Add new circle
-  - Update circles (For Now: any edit functionality, ideally: only name/description)
+  - Update circles
   - Delete circles (iff circle has no decisions)
-  - Add leader (This may not be best place for authorization - may need to just add functionality in view?)
-  - Edit self (leader or Super)
-  - Delete self (leader or super)
-  - Add/edit/delete own circle's decision
+  - Delete self
+  - Edit self
 * Login required for 'super.' Above, plus can:
   - Edit leaders:
     - Delete
@@ -35,7 +34,6 @@
   - Edit other Supers
   - Add/edit/delete any decision
   - Delete Super
-
 ## Goals for the Application
 * Continue to work with Hart's Mill Eco-Village to design this product with their needs in mind
 * Beautify and advance the site's style
