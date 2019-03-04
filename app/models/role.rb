@@ -4,5 +4,5 @@ class Role < ApplicationRecord
   validates :role_type, :presence => true
   validates :circle, :presence => true
   validates :user, :presence => true
-
+  validates :role_type, inclusion: { in: %w(ol er none admin), message: "%{value} is not a valid role type" }
 end

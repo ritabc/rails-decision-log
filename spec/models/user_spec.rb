@@ -39,5 +39,10 @@ describe User do
     it 'can belong to many circles' do
       expect(@leader.circles.count).to eq 4
     end
+
+    it 'only validates super and leader site admin types' do
+      @leader.site_admin_type = "random"
+      expect(@leader.save).to eq(false)
+    end
   end
 end

@@ -12,4 +12,10 @@ describe Role do
       expect(create :role).to be_valid
     end
   end
+
+  it 'validates role type inclusion' do
+    role = create :role
+    role.role_type = "random"
+    expect(role.save).to eq(false)
+  end
 end
