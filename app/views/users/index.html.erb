@@ -13,6 +13,7 @@
         <th scope="col">Last Initial</th>
         <th scope="col">Email</th>
         <th scope="col">Admin Type</th>
+        <th scope="col">Roles</th>
         <th scope="col">Edit</th>
         <th scope="col">Delete</th>
       </tr>
@@ -25,6 +26,18 @@
           <td><%= user.last_initial %></td>
           <td><%= user.email %></td>
           <td><%= user.site_admin_type %></td>
+          <td>
+            <% user.roles.order(role_type: :desc).each do |role| %>
+              <% unless (role.role_type == 'super' || role.role_type == 'none') %>
+                <% rt_readable = 'OL' if role.role_type == 'ol' %>
+                <% rt_readable = 'ER' if role.role_type == 'er' %>
+                <% rt_readable = 'Admin' if role.role_type == 'circle_admin' %>
+                <% circle_abbrev = Circle.find(role.circle_id).abbreviation %>
+                <span><%= rt_readable %> of <%= circle_abbrev %> </span>
+                <br>
+              <% end %>
+            <% end %>
+          </td>
           <td><%= link_to "Edit", edit_user_path(user), { class: "btn btn-info" } %></td>
           <td><%= link_to "Delete", user_path(user), { :data => { confirm: "You sure?", method: "delete" }, class: "btn btn-danger" } %></td>
         </tr>
