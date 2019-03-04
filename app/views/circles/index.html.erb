@@ -39,7 +39,7 @@
             <% end %>
           </td>
           <td><%= circle.description %></td>
-          <td><%= link_to "View", "#", { class: "btn btn-primary" } %></td>
+          <td><%= link_to "View", circle_decisions_path(circle), { class: "btn btn-primary" } %></td>
           <% if allow? :circles, :edit %>
             <td><%= link_to "Edit", edit_circle_path(circle), { class: "btn btn-info" } %></td>
             <td><%= link_to "Delete", circle_path(circle), { :data => { confirm: "You sure?", method: "delete" }, class: "btn btn-danger" } %></td>
