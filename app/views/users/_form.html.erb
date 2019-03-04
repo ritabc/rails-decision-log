@@ -17,7 +17,7 @@
 </div>
 
 <div class="form-row">
-  <div class="col-md-7" id="password-super">
+  <div class="col-md-6" id="password-super">
     <div class="form-group">
       <%= f.label :password %>
       <span>(Leave these blank if not changing password)</span>
@@ -37,13 +37,15 @@
   </div>
 
   <% if allow_roles_assign %>
-    <div class="col-md-5">
+    <div class="col-md-6">
       <p>Circles user is involved in</p>
-      <%= f.fields_for :roles do |ff| %>
-        <p><%= ff.object.circle.name %></p>
-        <% role_type_options = [["Operational Leader", "ol"], ["Elected Representative", "er"], ["Administrator", "admin"], ["None", "none"]] %>
-        <%= ff.select :role_type, role_type_options %>
-        <%= ff.hidden_field :circle_id %>
+      <%= f.fields_for :roles, f.object.roles.sort_by(&:circle_id)  do |ff| %>
+        <div class="form-group">
+          <span><%= ff.object.circle.name %></span>
+          <% role_type_options = [["Operational Leader", "ol"], ["Elected Representative", "er"], ["Administrator", "admin"], ["None", "none"]] %>
+          <%= ff.select :role_type, role_type_options %>
+          <%= ff.hidden_field :circle_id %>
+        </div>
       <% end %>
     </div>
   <% end %>
