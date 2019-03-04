@@ -56,7 +56,7 @@ class DecisionsController < ApplicationController
   def destroy
     @decision = current_resource
     @decision.destroy
-    redirect_to decisions_path
+    redirect_to root_path
   end
 
   def review

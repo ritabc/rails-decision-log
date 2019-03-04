@@ -58,6 +58,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = current_resource
+    @user.destroy
+    redirect_to users_path
+  end
+
 private
 
   def regular_user_params
