@@ -20,7 +20,7 @@
           <td scope="row"><%= circle.abbreviation %></td>
           <td><%= circle.name %></td>
           <td>
-            <% circle.roles.each do |role| %>
+            <% circle.roles.order(role_type: :desc).each do |role| %>
               <% unless (role.role_type == 'none' || role.role_type == 'super') %>
                 <% rt_readable = 'OL' if role.role_type == 'ol' %>
                 <% rt_readable = 'ER' if role.role_type == 'er' %>
