@@ -12,9 +12,10 @@
 
   <div class="form-group col-md-3">
     <%= f.label :date_decided, "Date Decided (Required)" %>
-    <div class="input-group">
-      <%= f.date_field :date_decided, required: true, class: "form-control mb-2 mr-sm-2" %>
+    <div class="input-group" aria-desbribedby="dd-help-block">
+      <%= f.date_field :date_decided, { required: true, max: Date.today, class: "form-control mb-2 mr-sm-2" } %>
     </div>
+    <small id="dd-help-block" class="form-text text-muted">Date Decided must be today or earlier</small>
   </div>
 </div>
 
