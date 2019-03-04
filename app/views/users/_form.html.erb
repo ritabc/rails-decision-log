@@ -25,13 +25,15 @@
       <%= f.label :password_confirmation %>
       <%= f.password_field :password_confirmation, {class: "form-control", disabled: allow_roles_assign && !editing_self }%>
     </div>
-    <div class="form-group">
-      <p>Should the User be a Super Admin?</p>
-      <div class="custom-control custom-switch">
-        <%= f.check_box :site_admin_type, { class: "custom-control-input" }, 'super', 'leader' %>
-        <%= f.label :site_admin_type, "Super", class: "custom-control-label" %>
+    <% unless editing_self && !super?(@user) %>
+      <div class="form-group">
+        <p>Should the User be a Super Admin?</p>
+        <div class="custom-control custom-switch">
+          <%= f.check_box :site_admin_type, { class: "custom-control-input" }, 'super', 'leader' %>
+          <%= f.label :site_admin_type, "Super", class: "custom-control-label" %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 
   <% if allow_roles_assign %>
