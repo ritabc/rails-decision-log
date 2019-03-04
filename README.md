@@ -5,10 +5,15 @@
 ## Completed Features
 * Home page of All Decisions, Sortable by Name, Circle, Date Decided
 * Full-text search of Decisions using pg_search gem
-* From scratch Authorization
+* From scratch Authorization, including 3 tiers of User Types
 * Use of BCrypt gem for Authentication
 * Use of partials to DRY new & edit forms for decisions, circles, and users
-*
+
+## Summary of Database and Associations, and note on nested form helpers
+Within Hart's Mill, we have circles, which are groups that can be thought of like committees or working groups. The main circle is called 'General Circle', and we have Functional Circles (FCs) as well. Each FC has an Operational Leader (OL) and an Elected Representative (ER). The OL's and ER's of each Functional Circle make up the General Circle. Users of the site are, for the most part, either an OL or ER of an FC. They could also be a Circle Administrator for any circle.
+I implemented a many-to-many relationship between circles and users, through roles.
+One thing I had trouble with during this project was nested form helpers. For instance, while adding or editing a user, I wanted to be able to edit their roles. This was made difficult as I wanted to see one role form-question per circle, instead of per each role. The latter approach seemed better documented (having the nested form iterate over each :through table, instead of the other side of the many-to-many relationship).
+I ended up figuring out a workaround, however in order to do so I had to give each combination of User and Circle its own Role, even if it was just 'none'. This turned out to not be a big issue, at least it isn't for now.
 
 ## Screenshot of New Decision Page
 #### As viewable by Leader and Super (Admin-Type) Users
@@ -18,15 +23,16 @@
 #### (Some of this functionality is still in-progress)
 * Public 'viewer.' Anyone, without logging in, can see:
   - all circles and decisions; Decisions are sorted by name, circle, or date decided, or filtered by circle or whether it has a review by date
-* Login required for 'leader.' Above, plus can:
+* Login required for 'leader' tier. Above, plus can:
   - Add/Edit/delete own circle's decision
   - Add new circle
   - Update circles
   - Delete circles (iff circle has no decisions)
   - Delete self
   - Edit self
-* Login required for 'super.' Above, plus can:
+* Login required for 'super' tier. Above, plus can:
   - Edit leaders:
+    - Add new admin (leader or super)
     - Delete
     - Graduate leader to Super
     - Degraduate Super to Leader
@@ -37,9 +43,9 @@
 ## Goals for the Application
 * Continue to work with Hart's Mill Eco-Village to design this product with their needs in mind
 * Beautify and advance the site's style
-* 'Forgot Password' feature for Leaders and Supers
-* Add password length validation and corresponding error message : if the user tries to sign up with a short password, there is an appropriate error message
-* Improve test coverage integration tests
+* 'Forgot Password' feature for Leaders and Supers, and Action Mailer in general
+  - Additionally, a request invite feature where a viewer could enter their email, and an email would be sent to the super admins, telling them who requested to be added.
+* Improve test coverage, including integration tests
 * Have HM be a group - other organizations could use this tool as well
 * 'Request Invite' feature: Since edits to these decisions are done by Hart's Mill Members only, a form where a viewer can request to be added as an leaders should be available. This would send an email the supers
 
@@ -64,10 +70,10 @@
 * Lightly styled with Bootstrap 4
 * This application is licensed under the MIT license.
 
-If you'd like to learn about the Hart's Mill Eco-Village community/project, see the [website](http://www.hartsmill.org/) for more details.
-
 With help from following RailsCast episodes:
   - #228 Sortable Table Columns
   - #37 Simple Search Form
   - #343 Full-Text Search in PostgreSQL
   - #385, #386 Authorization from Scratch Parts 1 & 2
+
+If you'd like to learn about the Hart's Mill Eco-Village community/project, see the [website](http://www.hartsmill.org/) for more details.
