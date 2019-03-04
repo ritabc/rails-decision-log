@@ -22,7 +22,7 @@ class CirclesController < ApplicationController
     @circle = current_resource
   end
 
-  def update ## TODO: Also need to be able to update roles
+  def update 
     @circle = current_resource
     if @circle.update(circle_params)
       flash[:notice] = "Circle successfully updated!"

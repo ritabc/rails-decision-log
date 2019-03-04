@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_resource
+    original_type = @user.site_admin_type
     bool_array =[]
     bool_array.push(@user.update(regular_user_params))
     unless user_roles_params["roles_attributes"].nil?
@@ -45,9 +46,12 @@ class UsersController < ApplicationController
         bool_array.push(bool)
       end
     end
+    if original_type != regular_user_params["site_admin_type"]
+      @user = toggle_admins_and_nones(@user)
+    end
     unless bool_array.include?(false)
       flash[:notice] = "User successfully updated!"
-      redirect_to super?(current_user) ? users_path : root_path 
+      redirect_to super?(current_user) ? users_path : root_path
     else
       flash[:alert] = "Please try again - user was not updated"
       redirect_to edit_user_path
@@ -75,5 +79,18 @@ private
         Role.new(role_type: "admin", circle: circle, user: current_user)
       end
     end
+  end
+
+  def toggle_admins_and_nones(user)
+    user.roles.each do |role|
+      if role.role_type == "admin"
+        role.role_type = "none"
+      elsif role.role_type == "none"
+        role.role_type = "admin"
+      end
+      role.save
+    end
+    user.save
+    user
   end
 end
