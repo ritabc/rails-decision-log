@@ -23,9 +23,8 @@ class Permission
 
       # If they're logged in as a super
       if super?(user)
-        allow :decisions, [:new, :create]
-        allow :users, :index
-        allow [:users, :decisions], [:edit, :update, :destroy]
+        allow :users, [:index]
+        allow [:users, :decisions], [:new, :create, :edit, :update, :destroy]
         allow :circles, [:edit, :update]
 
       # If they're logged in as a leader
