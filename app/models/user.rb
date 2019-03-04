@@ -20,7 +20,7 @@ private
     # If super, iterate over circles, create new role, role_type: admin
     elsif site_admin_type == "super"
       Circle.all.each do |circle|
-        Role.create(role_type: "admin", circle: circle, user: self)
+        Role.create(role_type: "super", circle: circle, user: self)
       end
     end
   end

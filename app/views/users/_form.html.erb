@@ -42,7 +42,7 @@
       <%= f.fields_for :roles, f.object.roles.sort_by(&:circle_id)  do |ff| %>
         <div class="form-group">
           <span><%= ff.object.circle.name %></span>
-          <% role_type_options = [["Operational Leader", "ol"], ["Elected Representative", "er"], ["Administrator", "admin"], ["None", "none"]] %>
+          <% role_type_options = [["Operational Leader", "ol"], ["Elected Representative", "er"], ["Circle Administrator", "circle_admin"], ["Site Admin (Super)", "super"], ["None", "none"]] %>
           <%= ff.select :role_type, role_type_options %>
           <%= ff.hidden_field :circle_id %>
         </div>

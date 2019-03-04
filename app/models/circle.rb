@@ -16,7 +16,7 @@ private
       if user.site_admin_type == "leader"
         Role.create(role_type: "none", circle: self, user: user)
       elsif user.site_admin_type == "super"
-        Role.create(role_type: "admin", circle: self, user: user)
+        Role.create(role_type: "super", circle: self, user: user)
       end
     end
   end

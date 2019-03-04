@@ -82,17 +82,17 @@ private
     if super?(current_resource) # TODO: If current_resource is super!
       circles = Circle.all
       circles.each do |circle|
-        Role.new(role_type: "admin", circle: circle, user: current_user)
+        Role.new(role_type: "super", circle: circle, user: current_user)
       end
     end
   end
 
   def toggle_admins_and_nones(user)
     user.roles.each do |role|
-      if role.role_type == "admin"
+      if role.role_type == "super"
         role.role_type = "none"
       elsif role.role_type == "none"
-        role.role_type = "admin"
+        role.role_type = "super"
       end
       role.save
     end

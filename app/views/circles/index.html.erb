@@ -21,20 +21,14 @@
           <td><%= circle.name %></td>
           <td>
             <% circle.roles.each do |role| %>
-              <% if circle.abbreviation == "GC" %>
-                <% if role.role_type == 'admin' %>
-                  <span><%= role.role_type %>: </span>
-                  <span><%= role.user.first_name %> </span>
-                  <span><%= role.user.last_initial %></span>
-                  <br>
-                <% end %>
-              <% else %>
-                <% unless role.role_type == 'none' || role.role_type == 'admin' %>
-                  <span><%= role.role_type %>: </span>
-                  <span><%= role.user.first_name %> </span>
-                  <span><%= role.user.last_initial %></span>
-                  <br>
-                <% end %>
+              <% unless (role.role_type == 'none' || role.role_type == 'super') %>
+                <% rt_readable = 'OL' if role.role_type == 'ol' %>
+                <% rt_readable = 'ER' if role.role_type == 'er' %>
+                <% rt_readable = 'Admin' if role.role_type == 'circle_admin' %>
+                <span><%= rt_readable %>: </span>
+                <span><%= role.user.first_name %> </span>
+                <span><%= role.user.last_initial %></span>
+                <br>
               <% end %>
             <% end %>
           </td>
