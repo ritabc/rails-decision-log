@@ -31,7 +31,8 @@ class Permission
       else
         allow :circles, [:edit, :update]
         allow :decisions, :new
-        allow :decisions, [:create, :edit, :update, :destroy] do |decision|
+        allow :decisions, :create # TODO: Find way to prevent users unassociated with the decisions circles to create decisions. For now, the view only allows them to select associated circles
+        allow :decisions, [:edit, :update, :destroy] do |decision|
           circles_user_involved_in = []
           Circle.all.each do |circle|
             role = Role.find_by(circle: circle, user: user)
