@@ -1,5 +1,5 @@
 # Decision Log in Rails
-#### Created by Rita Bennett-Chew, for Hart's Mill Eco-Village
+#### Created by Rita Bennett-Chew, for Common Ground Ecovillage (formerly known as Hart's Mill)
 #### https://hmev-decision-log.herokuapp.com/
 
 ## Completed Features
@@ -10,7 +10,7 @@
 * Use of partials to DRY new & edit forms for decisions, circles, and users
 
 ## Summary of Database and Associations
-Within Hart's Mill, we have circles, which are groups that can be thought of like committees or working groups. The main circle is called 'General Circle', and we have Functional Circles (FCs) as well. Each FC has an Operational Leader (OL) and an Elected Representative (ER). The OL's and ER's of each Functional Circle make up the General Circle. Users of the site are, for the most part, either an OL or ER of an FC. They could also be a Circle Administrator for any circle.
+At Common Ground, we have circles, which are groups that can be thought of like committees or working groups. The main circle is called 'General Circle', and we have Functional Circles (FCs) as well. Each FC has an Operational Leader (OL) and an Elected Representative (ER). The OL's and ER's of each Functional Circle make up the General Circle. Users of the site are, for the most part, either an OL or ER of an FC. They could also be a Circle Administrator for any circle.
 I implemented a many-to-many relationship between circles and users, through roles.
 
 ## Screenshot of New Decision Page
@@ -39,13 +39,13 @@ I implemented a many-to-many relationship between circles and users, through rol
   - Add/edit/delete any decision
   - Delete Super
 ## Goals for the Application
-* Continue to work with Hart's Mill Eco-Village to design this product with their needs in mind
+* Continue to work with Common Ground Ecovillage to design this product with their needs in mind
 * Beautify and advance the site's style
 * 'Forgot Password' feature for Leaders and Supers, and Action Mailer in general
   - Additionally, a request invite feature where a viewer could enter their email, and an email would be sent to the super admins, telling them who requested to be added.
 * Improve test coverage, including integration tests
 * Have HM be a group - other organizations could use this tool as well
-* 'Request Invite' feature: Since edits to these decisions are done by Hart's Mill Members only, a form where a viewer can request to be added as an leaders should be available. This would send an email the super users
+* 'Request Invite' feature: Since edits to these decisions are done by Common Ground Members only, a form where a viewer can request to be added as an leaders should be available. This would send an email the super users
 
 ## For contributions or to serve locally
 1. Fork and clone the [repo](https://github.com/ritabc/rails-decision-log)
@@ -74,4 +74,4 @@ With help from following RailsCast episodes:
   - #343 Full-Text Search in PostgreSQL
   - #385, #386 Authorization from Scratch Parts 1 & 2
 
-If you'd like to learn about the Hart's Mill Eco-Village community/project, see the [website](http://www.hartsmill.org/) for more details.
+If you'd like to learn about Common Ground Ecovillage, see the [website](http://www.commonground.eco/) for more details.
