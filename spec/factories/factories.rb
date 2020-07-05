@@ -13,6 +13,15 @@ FactoryBot.define do
   # 2. Decision, which must belong to a circle
   # 3. User, who when created will make:
   # 4. Role (by default, type will be:c none or admin) for every circle
+ 
+  ## Factory for Decision, which belongs_to a Circle
+  factory :decision do
+    name { "Dig a well" }
+    description { "We decided to dig a well, and cover it with a pump house" }
+    date_decided {4.years.ago }
+    circle
+    # association :circle, factory: :circle_with_decisions
+  end
 
   ## Factory for Circle
   ## Factor without decisions
@@ -21,25 +30,28 @@ FactoryBot.define do
     description { "This is the description for land stewardship" }
     abbreviation { "LS "}
 
-    ## Optional Trait: Has Decisions
-    trait :with_decisions do
+    # With the following nested block, In tests, we can now say: 
+    # circle_with_decisions = create(:circle_with_decisions, decisions_count: 7) || create(:circle_with_decisions) # to create 5
+    # expect(circle_with_decisions.decisions.count).to eq 7
+    factory :circle_with_decisions do
+      transient do 
+        decisions_count {5}
+      end
 
-      # Add transient atttributes (data which aren't attributes on the model)
-      # transient do
-      #   decisions_count { 5 }
-      # end
-      decisions { create_list :decision, 5 }
+      after(:create) do |circle, evaluator|
+        create_list(:decision, evaluator.decisions_count, circle: circle)
+      end
     end
   end
 
-  ## Factory for Decision, which belongs_to a Circle
-  factory :decision do
-    name { "Dig a well" }
-    description { "We decided to dig a well, and cover it with a pump house" }
-    date_decided { Date.new(2016,5,27) }
-    circle
-  end
+  
 
+  # factory :circle_with_decisions do
+  #   after(:create) do |circle|
+  #     create_list(:decision, 5, circle: circle)
+  #   end
+  # end
+  
   ## Factory for User type: 'leader' Default leader will be None role_type for each circle
   factory :leader, class: User do
     email { generate(:email) }

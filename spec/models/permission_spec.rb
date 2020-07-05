@@ -10,7 +10,7 @@ describe Permission do
 
   context 'User as guest' do
     subject { Permission.new(nil) }
-    it { should allow(:decisions, :index) }
+    it { should allow(:decisions, :all) }
     it { should_not allow(:decisions, :new) }
     it { should_not allow(:decisions, :create) }
     it { should_not allow(:decisions, :edit) }
@@ -44,11 +44,11 @@ describe Permission do
     context 'without circles associated with them' do
 
       let(:circle) { create :circle }
-      let(:circle_with_decisions ) { create :circle, :with_decisions }
+      let(:circle_with_decisions ) { create :circle_with_decisions }
 
       subject { Permission.new(create :leader, email: "rita#{rand(10)}@email.com") }
 
-      it { should allow(:decisions, :index) }
+      it { should allow(:decisions, :all) }
 
       it { should allow(:circles, :index) }
       it { should allow(:circles, :new) }
@@ -69,8 +69,6 @@ describe Permission do
       let(:themself) { create :leader, email: "rita#{rand(10)}@email.com" }
       let(:another) { create :leader, email: "rbc#{rand(10)}@email.com" }
       subject { Permission.new(themself)}
-      # it { should allow("users", "new") } # These 2: Can only add the type of themself of lower (leader < super)
-      # it { should allow("users", "create") }
       it { should allow(:users, :edit, themself) }
       it { should allow(:users, :update, themself) }
       it { should allow(:users, :destroy, themself) }
@@ -99,19 +97,19 @@ describe Permission do
         # binding.pry # Should have 2 roles (b.c there's 2 circles), both are None type
         # Give access to leader for associated_circle
         associated_role = Role.find_by(user: leader, circle: @associated_circle)
-        associated_role.role_type = "admin"
+        associated_role.role_type = "circle_admin"
         associated_role.save
         Permission.new(leader)
       end
       #
-      it { should allow(:decisions, :index) }
+      it { should allow(:decisions, :all) }
       it { should allow(:decisions, :new, @associated_decision) }
       it { should allow(:decisions, :create, @associated_decision) }
       it { should allow(:decisions, :edit, @associated_decision) }
       it { should allow(:decisions, :update, @associated_decision) }
       it { should allow(:decisions, :destroy, @associated_decision) }
       it { should allow(:decisions, :new, @non_associated_decision) }
-      it { should_not allow(:decisions, :create, @non_associated_decision) }
+      # it { should_not allow(:decisions, :create, @non_associated_decision) }
       it { should_not allow(:decisions, :edit, @non_associated_decision) }
       it { should_not allow(:decisions, :update, @non_associated_decision) }
       it { should_not allow(:decisions, :destroy, @non_associated_decision) }

@@ -11,12 +11,6 @@
 Circle.destroy_all
 Decision.destroy_all
 
-# Fake Data of course, never seeded to live site!
-mm_er = User.create!({email: 'mary@example.com', password: 'a_password', password_confirmation: 'a_password', site_admin_type: 'leader'})
-mm_er.roles.create!(role_type: "ER", circle: Circle.find_by(name: "Membership and Marketing"))
-gc_administrator = User.create!({email: 'ashley@example.com', password: 'a_password', password_confirmation: 'a_password', site_admin_type: 'leader'})
-mm_er.roles.create!(role_type: "Admin", circle: Circle.find_by(name: "Membership and Marketing"))
-
 circles = Circle.create!([
   {name: 'General Circle', description: "Central governing body, comprised of Functional Circle Operational Leaders (OL's) and Elected Representatives (ER's)", abbreviation: "GC"},
   {name: 'Planning, Design, and Development', description: "Tasked with county approvals, site planning and strategy, landowner negotiation, and business planning", abbreviation: "PDD"},
@@ -24,6 +18,13 @@ circles = Circle.create!([
   {name: 'Membership and Marketing', description: "Tasked with policies, process, orientation and integration regarding membership, maintaining records, membership advancement and exit, and marketing.", abbreviation: "M&M"},
   {name: 'Land Stewardship', description: "Tasked with recommending and facilitating land improvements, managing gards and the farm, coordinating work days", abbreviation: "LS"},
   {name: 'Financial & Legal', description: "Tasked with financial planning, accounting and record-keeping, reporting, entities management, and financing", abbreviation: "FL"}])
+
+# Fake Data of course, never seeded to live site!
+mm_er = User.create!({email: 'mary3@example.com', password: 'a_password', password_confirmation: 'a_password', site_admin_type: 'leader'})
+mm_er.roles.create!(role_type: "er", circle: Circle.find_by(name: "Membership and Marketing"))
+gc_administrator = User.create!({email: 'ashley@example.com', password: 'a_password', password_confirmation: 'a_password', site_admin_type: 'leader'})
+mm_er.roles.create!(role_type: "circle_admin", circle: Circle.find_by(name: "Membership and Marketing"))
+
 
 decisions = Decision.create!([
   {name: "Gate Lock", description: "We decided that the lock on the gate at Faye St should be a combination lock instead of a key lock. This way folks who need to access the land (for instance Daniel S. who sometimes mows), can easily do so without arranging for someone with a key to meet them or unlock it prior. Anthony can be contacted for the combination.",  date_decided: Date.new(2015,9,17), circle_id: Circle.find_by(name: "Land Stewardship").id, supp_doc_one_type: "Minutes", supp_doc_one_link: "https://hartsmill.onlyoffice.com/products/files/doceditor.aspx?fileid=4579533"},
