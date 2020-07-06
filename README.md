@@ -23,9 +23,6 @@ I implemented a many-to-many relationship between circles and users, through rol
   - all circles and decisions; Decisions are sorted by name, circle, or date decided, or filtered by circle or whether it has a review by date
 * Login required for 'leader' tier. Above, plus can:
   - Add/Edit/delete own circle's decision
-  - Add new circle
-  - Update circles
-  - Delete circles (iff circle has no decisions)
   - Delete self
   - Edit self
 * Login required for 'super' tier. Above, plus can:
@@ -36,6 +33,8 @@ I implemented a many-to-many relationship between circles and users, through rol
     - Degraduate Super to Leader
     - assign leaders/supers to circles
   - Edit other Supers
+  - Add/update circle
+  - Delete circles (iff circle has no decisions)
   - Add/edit/delete any decision
   - Delete Super
 ## Goals for the Application

@@ -20,7 +20,7 @@ circles = Circle.create!([
   {name: 'Financial & Legal', description: "Tasked with financial planning, accounting and record-keeping, reporting, entities management, and financing", abbreviation: "FL"}])
 
 # Fake Data of course, never seeded to live site!
-mm_er = User.create!({email: 'mary3@example.com', password: 'a_password', password_confirmation: 'a_password', site_admin_type: 'leader'})
+mm_er = User.create!({email: 'mary@example.com', password: 'a_password', password_confirmation: 'a_password', site_admin_type: 'leader'})
 mm_er.roles.create!(role_type: "er", circle: Circle.find_by(name: "Membership and Marketing"))
 gc_administrator = User.create!({email: 'ashley@example.com', password: 'a_password', password_confirmation: 'a_password', site_admin_type: 'leader'})
 mm_er.roles.create!(role_type: "circle_admin", circle: Circle.find_by(name: "Membership and Marketing"))

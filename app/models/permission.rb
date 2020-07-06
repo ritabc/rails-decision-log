@@ -13,23 +13,21 @@ class Permission
 
     # If They're logged in
     if user
-      allow :circles, [:new, :create]
       allow :users, :show do |user_record|
         user_record == user
-      end
-      allow :circles, :destroy do |circle|
-        circle_has_no_decisions?(circle)
       end
 
       # If they're logged in as a super
       if super?(user)
         allow :users, [:index]
         allow [:users, :decisions], [:new, :create, :edit, :update, :destroy]
-        allow :circles, [:edit, :update]
+        allow :circles, [:new, :create, :edit, :update]
+        allow :circles, :destroy do |circle|
+          circle_has_no_decisions?(circle)
+        end
 
       # If they're logged in as a leader
       else
-        allow :circles, [:edit, :update]
         allow :decisions, :new
         allow :decisions, :create # TODO: Find way to prevent users unassociated with the decisions circles to create decisions. For now, the view only allows them to select associated circles
         allow :decisions, [:edit, :update, :destroy] do |decision|

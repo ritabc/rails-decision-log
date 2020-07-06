@@ -51,11 +51,11 @@ describe Permission do
       it { should allow(:decisions, :all) }
 
       it { should allow(:circles, :index) }
-      it { should allow(:circles, :new) }
-      it { should allow(:circles, :create) }
-      it { should allow(:circles, :edit) }
-      it { should allow(:circles, :update) }
-      it { should allow(:circles, :destroy, circle) }
+      it { should_not allow(:circles, :new) }
+      it { should_not allow(:circles, :create) }
+      it { should_not allow(:circles, :edit) }
+      it { should_not allow(:circles, :update) }
+      it { should_not allow(:circles, :destroy, circle) }
       it { should_not allow(:circles, :destroy, circle_with_decisions) }
 
       it 'should check sessions' do
@@ -123,23 +123,39 @@ describe Permission do
   end
 
   context 'User as super' do
+    
+  context 'users controller'
 
-    context 'users controller' do
+    let(:themself) { create :super, email: "rita#{rand(10)}@email.com" }
+    let(:another) { create :super, email: "rbc#{rand(10)}@email.com" }
 
-      let(:themself) { create :super, email: "rita#{rand(10)}@email.com" }
-      let(:another) { create :super, email: "rbc#{rand(10)}@email.com" }
+    subject { Permission.new(themself)}
 
-      subject { Permission.new(themself)}
+    it { should allow(:users, :edit, themself) }
+    it { should allow(:users, :update, themself) }
+    it { should allow(:users, :destroy, themself) }
+    it { should allow(:users, :show, themself) }
+    it { should allow(:users, :edit, another) }
+    it { should allow(:users, :update, another) }
+    it { should allow(:users, :destroy, another) }
+    it { should_not allow(:users, :show, another) }
 
-      it { should allow(:users, :edit, themself) }
-      it { should allow(:users, :update, themself) }
-      it { should allow(:users, :destroy, themself) }
-      it { should allow(:users, :show, themself) }
-      it { should allow(:users, :edit, another) }
-      it { should allow(:users, :update, another) }
-      it { should allow(:users, :destroy, another) }
-      it { should_not allow(:users, :show, another) }
+  end
 
-    end
+  context 'circles controller' do
+    
+    let(:super_user) {create :super}
+    let(:circle) { create :circle }
+    let(:circle_with_decisions ) { create :circle_with_decisions }
+
+    subject { Permission.new(super_user) }
+
+    it { should allow(:circles, :new) }
+    it { should allow(:circles, :create) }
+    it { should allow(:circles, :edit) }
+    it { should allow(:circles, :update) }
+    it { should allow(:circles, :destroy, circle) }
+    it { should_not allow(:circles, :destroy, circle_with_decisions) }
+
   end
 end
