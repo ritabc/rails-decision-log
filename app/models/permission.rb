@@ -10,6 +10,7 @@ class Permission
     allow :circles, :index
     allow :decisions, [:all, :review]
     allow :circle_decisions, :index
+    allow :password_resets, [:index, :create, :new, :edit, :update, :show, :destroy]
 
     # If They're logged in
     if user
