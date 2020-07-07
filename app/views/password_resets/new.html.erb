@@ -1,9 +1,9 @@
 <h1>Reset Password</h1>
 
 <%= form_tag password_resets_path, :method => :post do %>
-  <div class="field">
+  <div class="form-group form-inline">
     <%= label_tag :email %>
-    <%= text_field_tag :email, params[:email] %>
+    <%= text_field_tag :email, params[:email], class: "form-control mx-2" %>
   </div>
-  <div><%= submit_tag "Reset Password" %></div>
+  <div><%= submit_tag "Reset Password", class: "btn btn-primary" %></div>
 <% end %>
