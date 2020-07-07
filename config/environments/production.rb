@@ -73,7 +73,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
 
   config.action_mailer.smtp_settings = {
-    user_name: ENV["SENDGRID_API_KEY"],
+    user_name: ENV["SENDGRID_USERNAME"],
     password: ENV["SENDGRID_PASSWORD"],
     api_key: ENV["SENDGRID_API_KEY"],
     address: "smtp.sendgrid.net",
