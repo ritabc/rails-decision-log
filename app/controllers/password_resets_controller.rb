@@ -7,9 +7,8 @@ class PasswordResetsController < ApplicationController
     if user
       user.generate_token(:password_reset_token)
       user.password_reset_sent_at = Time.zone.now
-      if user.save
-        UserMailer.password_reset(user).deliver
-      end
+      save!
+      UserMailer.password_reset(user).deliver
     end
     # user.send_password_reset if user
     redirect_to root_url, :notice => "Email sent with password reset instructions."
