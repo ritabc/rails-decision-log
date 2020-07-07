@@ -7,7 +7,7 @@ class PasswordResetsController < ApplicationController
     if user
       user.generate_token(:password_reset_token)
       user.password_reset_sent_at = Time.zone.now
-      save!
+      user.save!
       UserMailer.password_reset(user).deliver
     end
     # user.send_password_reset if user
