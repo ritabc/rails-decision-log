@@ -86,7 +86,6 @@ FactoryBot.define do
     end
   end
 
-
   factory :role do
     role_type { "ol" }
     circle { create :circle }

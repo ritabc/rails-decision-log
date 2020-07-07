@@ -29,5 +29,8 @@ module RailsDecisionLog
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.autoload_paths << "#{Rails.root}/spec/support"
+    config.eager_load_paths << "#{Rails.root}/spec/support"
   end
 end

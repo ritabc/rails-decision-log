@@ -66,8 +66,12 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
 
+
   config.include Rails.application.routes.url_helpers
   config.include Capybara::DSL
+
+  config.include(MailerHelper)
+  config.before(:each) {reset_email}
 
 end
 Shoulda::Matchers.configure do |config|

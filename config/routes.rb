@@ -18,6 +18,6 @@ Rails.application.routes.draw do
   post '/signin' => 'sessions#create'
   get '/signout' => 'sessions#destroy'
 
-  resources :password_resets
+  resources :password_resets, except: [:show, :index, :destroy]
 
 end
