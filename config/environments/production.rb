@@ -78,7 +78,7 @@ Rails.application.configure do
     api_key: ENV["SENDGRID_API_KEY"],
     address: "smtp.sendgrid.net",
     port: 465,
-    domain: "http://hmev-decision-log.herokuapp.com",
+    domain: "hmev-decision-log.herokuapp.com",
     authentication: :plain,
     enable_starttls_auto: true
     }
