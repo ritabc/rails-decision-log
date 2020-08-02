@@ -2,7 +2,7 @@ class CircleDecisionsController < ApplicationController
   def index
     @circles = Circle.order(:id)
     @circle = Circle.find_by(id: circle_decision_params[:circle_id])
-    @decisions = @circle.decisions
+    @decisions = @circle.decisions.order(date_decided: :desc)
   end
 
 private
