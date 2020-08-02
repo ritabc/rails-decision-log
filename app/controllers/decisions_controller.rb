@@ -75,11 +75,11 @@ private
   end
 
   def sort_column
-    %w[name circle_id date_decided].include?(params[:sort]) ? params[:sort] : "name"
+    %w[name circle_id date_decided].include?(params[:sort]) ? params[:sort] : "date_decided"
   end
 
   def sort_direction
-    ["asc", "desc"].include?(params[:direction]) ? params[:direction] : "asc"
+    ["asc", "desc"].include?(params[:direction]) ? params[:direction] : "desc"
   end
 
   def sorting_by_name?
